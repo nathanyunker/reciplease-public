@@ -114,7 +114,7 @@ class AddRecipeForm extends Component {
       body: JSON.stringify(formPayload)
     }
 
-    fetch('http://localhost:8080/recipe', request).then(function(response) {
+    fetch('http://localhost:3000/recipe', request).then(function(response) {
       return response.json();
     }).then(function(data) { 
       console.log('got back data', data);
@@ -226,11 +226,11 @@ class AddRecipeForm extends Component {
                   </Row>
                 )
               })} 
-            <div>
-              <button className="btn" onClick={this.addDirection}>
-                Add Direction 
-              </button>
-            </div>
+              <div>
+                <button className="btn" onClick={this.addDirection}>
+                  Add Direction 
+                </button>
+              </div>
             </Col>
           </Col>
           <Col sm={6}>
