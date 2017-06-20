@@ -2,8 +2,8 @@ import React from 'react';
 import remove from 'lodash/remove'
  
 class RecipeList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       recipes: []
     };
@@ -34,14 +34,13 @@ class RecipeList extends React.Component {
       return response.json();
     }).then(function(data) { 
       recipeListController.setState({ recipes: data });
-      console.log('got back GET data', data);
     });
   }
  
   render() {
     return (
       <div>
-        <div> YEY THIS WORKS</div>
+        <input type="submit" value="Add Recipe" onClick={this.props.toggleAddRecipeForm} />
         <div>
           {this.state.recipes.map((recipe, idx) => {
             return(

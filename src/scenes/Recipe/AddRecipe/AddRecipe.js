@@ -3,8 +3,9 @@ import React from 'react';
 import AddRecipeForm from './components/AddRecipeForm';
  
 class AddRecipe extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    
     this.state = {
     };
   }
@@ -13,7 +14,7 @@ class AddRecipe extends React.Component {
     return (
       <div className="container">
         <div>Add A Recipe:</div>
-        <AddRecipeForm />
+        <AddRecipeForm toggleAddRecipeForm={this.props.toggleAddRecipeForm}/>
       </div>
     );
   }

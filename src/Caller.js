@@ -11,10 +11,6 @@ class Caller extends React.Component {
     };
   }
 
-  saveFood() {
-    console.log('hooray')
-  }
-
   componentDidMount() {
     var stateData = this;
 

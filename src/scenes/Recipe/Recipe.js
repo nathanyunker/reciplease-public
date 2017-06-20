@@ -11,22 +11,20 @@ class Recipe extends React.Component {
       showAddRecipeForm: false
     };
 
-    this.openAddRecipeForm = this.openAddRecipeForm.bind(this);
+    this.toggleAddRecipeForm = this.toggleAddRecipeForm.bind(this);
   }
  
-  openAddRecipeForm() {
-    this.setState({ showAddRecipeForm: true });
+  toggleAddRecipeForm() {
+    this.setState({ showAddRecipeForm: !this.state.showAddRecipeForm });
   }
 
   render() {
     return (
       <div className="container">
         <h2>Recipes:</h2>
-        { this.state.showAddRecipeForm ? <AddRecipe /> : 
-          <div>
-            <input type="submit" value="Add Recipe" onClick={this.openAddRecipeForm} />
-            <RecipeList/> 
-          </div>
+        { this.state.showAddRecipeForm ? 
+          <AddRecipe toggleAddRecipeForm={this.toggleAddRecipeForm}/> : 
+          <RecipeList toggleAddRecipeForm={this.toggleAddRecipeForm}/> 
         }
       </div>
     );

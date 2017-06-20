@@ -90,6 +90,7 @@ class AddRecipeForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
+    var addRecipeFormController = this;
     const formPayload = {
       name: this.state.name,
       description: this.state.description,
@@ -98,9 +99,6 @@ class AddRecipeForm extends Component {
       ingredients: this.state.ingredients,
       directions: this.state.directions
     };
-
-    console.log('Send this in a POST request:', formPayload);
-    console.log('the json:', JSON.stringify(formPayload));
 
     var myHeaders = new Headers({
       'Accept': 'application/json',
@@ -117,7 +115,7 @@ class AddRecipeForm extends Component {
     fetch('http://localhost:3000/recipe', request).then(function(response) {
       return response.json();
     }).then(function(data) { 
-      console.log('got back data', data);
+      addRecipeFormController.props.toggleAddRecipeForm();
     });
 
     this.handleClearForm(e);
