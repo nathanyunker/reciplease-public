@@ -171,14 +171,16 @@ class AddRecipeForm extends Component {
       <Form className="container" onSubmit={this.handleFormSubmit}>
         <Row>
           <Col sm={6}>
-            <FormGroup controlId="recipeName">
-              <ControlLabel>Recipe Name</ControlLabel>
-              <FormControl 
-                onChange={this.handleNameChange}
-                type="text" 
-                placeholder="Name"
-                value={this.state.name}/>
-            </FormGroup>
+            <Col sm={12}>
+              <FormGroup controlId="recipeName">
+                <ControlLabel>Recipe Name</ControlLabel>
+                <FormControl 
+                  onChange={this.handleNameChange}
+                  type="text" 
+                  placeholder="Name"
+                  value={this.state.name}/>
+              </FormGroup>
+            </Col>
             <Col sm={6}>
               <FormGroup controlId="recipeName">
                 <ControlLabel>Calorie Count</ControlLabel>
@@ -232,14 +234,16 @@ class AddRecipeForm extends Component {
             </Col>
           </Col>
           <Col sm={6}>
-          <FormGroup controlId="recipeDescription">
-              <ControlLabel>Recipe Description</ControlLabel>
-              <FormControl 
-                onChange={this.handleDescriptionChange}
-                componentClass="textarea" 
-                placeholder="Description"
-                value={this.state.description}/>
-            </FormGroup>
+            <Col sm={12}>
+              <FormGroup controlId="recipeDescription">
+                <ControlLabel>Recipe Description</ControlLabel>
+                <FormControl 
+                  onChange={this.handleDescriptionChange}
+                  componentClass="textarea" 
+                  placeholder="Description"
+                  value={this.state.description}/>
+              </FormGroup>
+            </Col>
             <Col sm={12}>
               <Col sm={3}>
                 <ControlLabel>Value</ControlLabel>
