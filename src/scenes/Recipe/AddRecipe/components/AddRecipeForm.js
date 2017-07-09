@@ -1,4 +1,6 @@
 import React, {Component} from 'react';  
+import without from 'lodash/without'
+import remove from 'lodash/remove'
 import SingleInput from '../../../../inputs/SingleInput';  
 import TextArea from '../../../../inputs/TextArea';
 import {Col, ControlLabel, Form, FormControl, FormGroup, Row} from 'react-bootstrap';
@@ -8,26 +10,39 @@ class AddRecipeForm extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      description: '',
       calorieCount: '',
-      numberOfServings: '',
+      description: '',
+      directions: [''],
       ingredients: [{name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}],
-      directions:['']
+      name: '',
+      numberOfServings: '',
+      sourceLink: ''
     };
 
     this.addIngredient = this.addIngredient.bind(this);
     this.addDirection = this.addDirection.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleCalorieCountChange = this.handleCalorieCountChange.bind(this);
-    this.handleNumberOfServingsChange = this.handleNumberOfServingsChange.bind(this);
-    this.handleIngredientNameChange = this.handleIngredientNameChange.bind(this);
-    this.handleIngredientMeasureChange = this.handleIngredientMeasureChange.bind(this);
-    this.handleIngredientValueChange = this.handleIngredientValueChange.bind(this);
+    this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleDirectionChange = this.handleDirectionChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleIngredientMeasureChange = this.handleIngredientMeasureChange.bind(this);
+    this.handleIngredientNameChange = this.handleIngredientNameChange.bind(this);
+    this.handleIngredientValueChange = this.handleIngredientValueChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleNumberOfServingsChange = this.handleNumberOfServingsChange.bind(this);
+    this.handleSourceLinkChange = this.handleSourceLinkChange.bind(this);
+    this.removeUnusedIngredientsAndDirections = this.removeUnusedIngredientsAndDirections.bind(this);
+  }
+
+  addDirection(e) {
+    e.preventDefault();
+    const directions = [...this.state.directions, 
+                  ''
+                 ];
+    this.setState({
+        directions,
+    });
   }
 
   addIngredient(e) {
@@ -40,13 +55,12 @@ class AddRecipeForm extends Component {
     });
   }
 
-  addDirection(e) {
+  deleteDirection(e, index) {
     e.preventDefault();
-    const directions = [...this.state.directions, 
-                  ''
-                 ];
+    var inputs = this.state.directions;
+    inputs.splice(index, 1);
     this.setState({
-        directions,
+      directions: inputs
     });
   }
   
@@ -59,45 +73,53 @@ class AddRecipeForm extends Component {
     });
   }
 
-  deleteDirection(e, index) {
-    e.preventDefault();
-    var inputs = this.state.directions;
-    inputs.splice(index, 1);
-    this.setState({
-      directions: inputs
-    });
-  }
-
   componentDidMount() {
 
-  }
-
-  handleNameChange(e) {
-    this.setState({ name: e.target.value });
-  }
-
-  handleDescriptionChange(e) {
-    this.setState({ description: e.target.value });
   }
 
   handleCalorieCountChange(e) {
     this.setState({ calorieCount: e.target.value });
   }
 
-  handleNumberOfServingsChange(e) {
-    this.setState({ numberOfServings: e.target.value });
+  handleClearForm(e) {
+    e.preventDefault();
+    this.setState({
+      calorieCount: '',
+      description: '',
+      directions: [''],
+      ingredients: [{name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}],
+      name: '',
+      numberOfServings: '',
+      sourceLink: ''
+    });
+  }
+
+  handleDescriptionChange(e) {
+    this.setState({ description: e.target.value });
+  }
+
+  handleDirectionChange(e, idx) {
+    const directions = this.state.directions;
+    directions[idx] = e.target.value;
+    this.setState({
+        directions: directions,
+    });
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
     var addRecipeFormController = this;
+
+    this.removeUnusedIngredientsAndDirections();
+
     const formPayload = {
-      name: this.state.name,
-      description: this.state.description,
       calorieCount: this.state.calorieCount,
-      numberOfServings: this.state.numberOfServings,
+      description: this.state.description,
+      directions: this.state.directions,
       ingredients: this.state.ingredients,
-      directions: this.state.directions
+      name: this.state.name,
+      numberOfServings: this.state.numberOfServings,
+      sourceLink: this.state.sourceLink
     };
 
     var myHeaders = new Headers({
@@ -121,32 +143,11 @@ class AddRecipeForm extends Component {
     this.handleClearForm(e);
   }
 
-
-  handleClearForm(e) {
-    e.preventDefault();
+  handleIngredientMeasureChange(e, index) {
+    var ingredients = this.state.ingredients;
+    ingredients[index].measure = e.target.value;
     this.setState({
-      name: '',
-      description: '',
-      calorieCount: '',
-      numberOfServings: '',
-      ingredients: [{name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}],
-      directions:['']
-    });
-  }
-
-  handleIngredientValueChange(e, idx) {
-    const ingredients = this.state.ingredients;
-    ingredients[idx].value = e.target.value;
-    this.setState({
-        ingredients: ingredients,
-    });
-  }
-
-  handleDirectionChange(e, idx) {
-    const directions = this.state.directions;
-    directions[idx] = e.target.value;
-    this.setState({
-        directions: directions,
+      ingredients: ingredients
     });
   }
 
@@ -158,11 +159,36 @@ class AddRecipeForm extends Component {
     });
   }
 
-  handleIngredientMeasureChange(e, index) {
-    var ingredients = this.state.ingredients;
-    ingredients[index].measure = e.target.value;
+  handleIngredientValueChange(e, idx) {
+    const ingredients = this.state.ingredients;
+    ingredients[idx].value = e.target.value;
     this.setState({
-      ingredients: ingredients
+        ingredients: ingredients,
+    });
+  }
+
+  handleNameChange(e) {
+    this.setState({ name: e.target.value });
+  }
+
+  handleNumberOfServingsChange(e) {
+    this.setState({ numberOfServings: e.target.value });
+  }
+
+  handleSourceLinkChange(e) {
+    this.setState({ sourceLink: e.target.value });
+  }
+
+  removeUnusedIngredientsAndDirections() {
+    var ingredients = this.state.ingredients;
+    var directions = this.state.directions;
+
+    remove(ingredients, {name: ''});
+    directions = without(directions, '');
+
+    this.setState({
+        ingredients: ingredients,
+        directions: newDirections,
     });
   }
 
@@ -170,81 +196,93 @@ class AddRecipeForm extends Component {
     return (
       <Form className="container" onSubmit={this.handleFormSubmit}>
         <Row>
+          <Col sm={12}>
+            <FormGroup controlId="recipeSourceLink">
+              <ControlLabel>Source Link</ControlLabel>
+              <FormControl 
+                onChange={this.handleSourceLinkChange}
+                type="text" 
+                placeholder="External Link"
+                value={this.state.sourceLink}/>
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
           <Col sm={6}>
-            <Col sm={12}>
-              <FormGroup controlId="recipeName">
-                <ControlLabel>Recipe Name</ControlLabel>
-                <FormControl 
-                  onChange={this.handleNameChange}
-                  type="text" 
-                  placeholder="Name"
-                  value={this.state.name}/>
-              </FormGroup>
-            </Col>
-            <Col sm={6}>
-              <FormGroup controlId="recipeName">
-                <ControlLabel>Calorie Count</ControlLabel>
-                <FormControl 
-                  onChange={this.handleCalorieCountChange}
-                  type="text" 
-                  placeholder="Calorie Count"
-                  value={this.state.calorieCount}/>
-              </FormGroup>
-            </Col>
-            <Col sm={6}>
-              <FormGroup controlId="recipeName">
-                <ControlLabel>No. of Servince</ControlLabel>
-                <FormControl 
-                  onChange={this.handleNumberOfServingsChange}
-                  type="text" 
-                  placeholder="No. of Servings"
-                  value={this.state.numberOfServings}/>
-              </FormGroup>
-            </Col>
-            <Col sm={12}>
+            <FormGroup controlId="recipeName">
+              <ControlLabel>Recipe Name</ControlLabel>
+              <FormControl 
+                onChange={this.handleNameChange}
+                type="text" 
+                placeholder="Name"
+                value={this.state.name}/>
+            </FormGroup>
+            <Row>
+              <Col sm={6}>
+                <FormGroup controlId="recipeCalorieCount">
+                  <ControlLabel>Calorie Count</ControlLabel>
+                  <FormControl 
+                    onChange={this.handleCalorieCountChange}
+                    type="text" 
+                    placeholder="Calorie Count"
+                    value={this.state.calorieCount}/>
+                </FormGroup>
+              </Col>
+              <Col sm={6}>
+                <FormGroup controlId="numberOfServings">
+                  <ControlLabel>No. of Servince</ControlLabel>
+                  <FormControl 
+                    onChange={this.handleNumberOfServingsChange}
+                    type="text" 
+                    placeholder="No. of Servings"
+                    value={this.state.numberOfServings}/>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
               <Col sm={10}>
                 <ControlLabel>Direction</ControlLabel>
               </Col>
-            </Col>
-            <Col sm={12}>
-              {this.state.directions.map((direction, idx) => {
-                return(
-                  <Row key={"direction-container"+idx}>
-                    <Col sm={10}>
-                      <FormGroup controlId="recipeDirection">
-                        <FormControl 
-                          onChange={(e) => this.handleDirectionChange(e, idx)}
-                          componentClass="textarea" 
-                          value={direction}/>
-                      </FormGroup>
-                    </Col>
-                    <Col sm={2}>
-                      <button className="btn" key={"remove-direction"+idx} onClick={(e) => this.deleteDirection(e, idx)}>
-                        X
-                      </button>
-                    </Col>
-                  </Row>
-                )
-              })} 
-              <div>
-                <button className="btn" onClick={this.addDirection}>
-                  Add Direction 
-                </button>
-              </div>
-            </Col>
+            </Row>
+            <Row>
+              <Col sm={12}>
+                {this.state.directions.map((direction, idx) => {
+                  return(
+                    <Row key={"direction-container"+idx}>
+                      <Col sm={10}>
+                        <FormGroup controlId="recipeDirection">
+                          <FormControl 
+                            onChange={(e) => this.handleDirectionChange(e, idx)}
+                            componentClass="textarea" 
+                            value={direction}/>
+                        </FormGroup>
+                      </Col>
+                      <Col sm={2}>
+                        <button className="btn" key={"remove-direction"+idx} onClick={(e) => this.deleteDirection(e, idx)}>
+                          X
+                        </button>
+                      </Col>
+                    </Row>
+                  )
+                })} 
+                <div>
+                  <button className="btn" onClick={this.addDirection}>
+                    Add Direction 
+                  </button>
+                </div>
+              </Col>
+            </Row>
           </Col>
           <Col sm={6}>
-            <Col sm={12}>
-              <FormGroup controlId="recipeDescription">
-                <ControlLabel>Recipe Description</ControlLabel>
-                <FormControl 
-                  onChange={this.handleDescriptionChange}
-                  componentClass="textarea" 
-                  placeholder="Description"
-                  value={this.state.description}/>
-              </FormGroup>
-            </Col>
-            <Col sm={12}>
+            <FormGroup controlId="recipeDescription">
+              <ControlLabel>Recipe Description</ControlLabel>
+              <FormControl 
+                onChange={this.handleDescriptionChange}
+                componentClass="textarea" 
+                placeholder="Description"
+                value={this.state.description}/>
+            </FormGroup>
+            <Row>
               <Col sm={3}>
                 <ControlLabel>Value</ControlLabel>
               </Col>
@@ -254,7 +292,8 @@ class AddRecipeForm extends Component {
               <Col sm={4}>
                 <ControlLabel>Name</ControlLabel>
               </Col>
-            </Col>
+            </Row>
+            <Row>
             <Col sm={12}>
               {this.state.ingredients.map((ingredient, idx) => {
                 return(
@@ -292,6 +331,7 @@ class AddRecipeForm extends Component {
                 )
               })} 
             </Col>
+            </Row>
             <div>
               <button className="btn" onClick={this.addIngredient}>
                 Add Ingredient 

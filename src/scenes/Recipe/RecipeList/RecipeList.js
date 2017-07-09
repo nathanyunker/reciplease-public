@@ -1,5 +1,6 @@
 import React from 'react';
 import remove from 'lodash/remove'
+import styles from './recipeList.less';
  
 class RecipeList extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class RecipeList extends React.Component {
  
   render() {
     return (
-      <div>
+      <div className="recipe-list-container">
         <input type="submit" value="Add Recipe" onClick={this.props.toggleAddRecipeForm} />
         <div>
           {this.state.recipes.map((recipe, idx) => {

@@ -20,9 +20,20 @@ module.exports = {
           'babel-loader',
         ],
       },
-      { 
-        test: /\.css$/, 
-        loader: "style-loader!css-loader" 
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {loader: "style-loader"}, 
+          {loader: "css-loader"}, 
+          {loader: "less-loader"}
+        ]
       },
       { 
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
