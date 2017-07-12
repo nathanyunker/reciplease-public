@@ -32,14 +32,12 @@ class AddRecipeForm extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNumberOfServingsChange = this.handleNumberOfServingsChange.bind(this);
     this.handleSourceLinkChange = this.handleSourceLinkChange.bind(this);
-    this.removeUnusedIngredientsAndDirections = this.removeUnusedIngredientsAndDirections.bind(this);
   }
 
   addDirection(e) {
     e.preventDefault();
-    const directions = [...this.state.directions, 
-                  ''
-                 ];
+    const directions = [...this.state.directions, ''];
+
     this.setState({
         directions,
     });
@@ -47,9 +45,8 @@ class AddRecipeForm extends Component {
 
   addIngredient(e) {
     e.preventDefault();
-    const ingredients = [...this.state.ingredients, 
-                  {name:'', measure: '', value: ''}
-                 ];
+    const ingredients = [...this.state.ingredients, {name:'', measure: '', value: ''}];
+
     this.setState({
         ingredients,
     });
@@ -109,14 +106,17 @@ class AddRecipeForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     var addRecipeFormController = this;
+    var ingredients = this.state.ingredients;
+    var directions = this.state.directions;
 
-    this.removeUnusedIngredientsAndDirections();
+    remove(ingredients, {name: ''});
+    directions = without(directions, '');
 
     const formPayload = {
       calorieCount: this.state.calorieCount,
       description: this.state.description,
-      directions: this.state.directions,
-      ingredients: this.state.ingredients,
+      directions: directions,
+      ingredients: ingredients,
       name: this.state.name,
       numberOfServings: this.state.numberOfServings,
       sourceLink: this.state.sourceLink
@@ -177,19 +177,6 @@ class AddRecipeForm extends Component {
 
   handleSourceLinkChange(e) {
     this.setState({ sourceLink: e.target.value });
-  }
-
-  removeUnusedIngredientsAndDirections() {
-    var ingredients = this.state.ingredients;
-    var directions = this.state.directions;
-
-    remove(ingredients, {name: ''});
-    directions = without(directions, '');
-
-    this.setState({
-        ingredients: ingredients,
-        directions: newDirections,
-    });
   }
 
   render() {
