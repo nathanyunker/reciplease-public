@@ -3,7 +3,7 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom'
 import { Redirect } from 'react-router';
 
 import Recipe from './scenes/Recipe/Recipe';
-import AddRecipe from './scenes/Recipe/AddRecipe/AddRecipe';
+import WriteRecipe from './scenes/Recipe/WriteRecipe/WriteRecipe';
 import AppNavBar from './components/Nav';
 
 const Home = () => (

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import AddRecipeForm from './components/AddRecipeForm';
+import WriteRecipeForm from './components/WriteRecipeForm';
  
-class AddRecipe extends React.Component {
+class WriteRecipe extends React.Component {
   constructor(props) {
     super(props);
     
@@ -14,9 +14,9 @@ class AddRecipe extends React.Component {
     return (
       <div className="container">
         <div>Add A Recipe:</div>
-        <AddRecipeForm toggleAddRecipeForm={this.props.toggleAddRecipeForm}/>
+        <WriteRecipeForm toggleWriteRecipeForm={this.props.toggleWriteRecipeForm}/>
       </div>
     );
   }
 }
-export default AddRecipe;
+export default WriteRecipe;

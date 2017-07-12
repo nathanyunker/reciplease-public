@@ -41,11 +41,11 @@ class RecipeList extends React.Component {
   render() {
     return (
       <div className="recipe-list-container">
-        <input type="submit" value="Add Recipe" onClick={this.props.toggleAddRecipeForm} />
+        <input type="submit" value="Add Recipe" onClick={this.props.toggleWriteRecipeForm} />
         <div>
           {this.state.recipes.map((recipe, idx) => {
             return(
-              <div key={"recipe"+idx}>
+              <div onClick={() => this.props.setSelectedRecipe(recipe)} key={"recipe"+idx}>
                 <span>{recipe.name}</span>
                 <button className="btn" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(idx)}>
                   X

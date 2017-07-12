@@ -5,7 +5,7 @@ import SingleInput from '../../../../inputs/SingleInput';
 import TextArea from '../../../../inputs/TextArea';
 import {Col, ControlLabel, Form, FormControl, FormGroup, Row} from 'react-bootstrap';
 
-class AddRecipeForm extends Component { 
+class WriteRecipeForm extends Component { 
   constructor(props) {
     super(props);
 
@@ -105,7 +105,7 @@ class AddRecipeForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    var addRecipeFormController = this;
+    var writeRecipeFormController = this;
     var ingredients = this.state.ingredients;
     var directions = this.state.directions;
 
@@ -137,7 +137,7 @@ class AddRecipeForm extends Component {
     fetch('http://localhost:3000/recipe', request).then(function(response) {
       return response.json();
     }).then(function(data) { 
-      addRecipeFormController.props.toggleAddRecipeForm();
+      writeRecipeFormController.props.toggleWriteRecipeForm();
     });
 
     this.handleClearForm(e);
@@ -344,4 +344,4 @@ class AddRecipeForm extends Component {
   }
 }
 
-export default AddRecipeForm;
+export default WriteRecipeForm;
