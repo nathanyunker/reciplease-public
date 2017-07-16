@@ -15,10 +15,9 @@ class Recipe extends React.Component {
     this.setSelectedRecipe = this.setSelectedRecipe.bind(this);
     this.toggleWriteRecipeForm = this.toggleWriteRecipeForm.bind(this);
   }
- 
-  setSelectedRecipe(recipe) {
-    console.log('well here it is', recipe);
-    this.setState({selectedRecipe: recipe});
+
+  setSelectedRecipe(newRecipe) {
+    this.setState({selectedRecipe: newRecipe}, this.toggleWriteRecipeForm)
   }
 
   toggleWriteRecipeForm() {
@@ -30,7 +29,7 @@ class Recipe extends React.Component {
       <div className="container">
         <h2>Recipes:</h2>
         { this.state.showWriteRecipeForm ? 
-          <WriteRecipe toggleWriteRecipeForm={this.toggleWriteRecipeForm}/> : 
+          <WriteRecipe selectedRecipe={this.state.selectedRecipe} toggleWriteRecipeForm={this.toggleWriteRecipeForm}/> : 
           <RecipeList setSelectedRecipe={this.setSelectedRecipe} toggleWriteRecipeForm={this.toggleWriteRecipeForm}/> 
         }
       </div>

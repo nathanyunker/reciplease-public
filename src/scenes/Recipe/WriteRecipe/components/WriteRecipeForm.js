@@ -1,6 +1,7 @@
 import React, {Component} from 'react';  
 import without from 'lodash/without'
 import remove from 'lodash/remove'
+import isEmpty from 'lodash/isEmpty'
 import SingleInput from '../../../../inputs/SingleInput';  
 import TextArea from '../../../../inputs/TextArea';
 import {Col, ControlLabel, Form, FormControl, FormGroup, Row} from 'react-bootstrap';
@@ -10,6 +11,7 @@ class WriteRecipeForm extends Component {
     super(props);
 
     this.state = {
+      _id:'',
       calorieCount: '',
       description: '',
       directions: [''],
@@ -71,7 +73,9 @@ class WriteRecipeForm extends Component {
   }
 
   componentDidMount() {
-
+    if (!isEmpty(this.props.selectedRecipe)) {
+      this.setState(this.props.selectedRecipe);
+    }
   }
 
   handleCalorieCountChange(e) {
@@ -108,6 +112,7 @@ class WriteRecipeForm extends Component {
     var writeRecipeFormController = this;
     var ingredients = this.state.ingredients;
     var directions = this.state.directions;
+    var endpoint = this.state._id ? 'http://localhost:3000/recipes/' + this.state._id : 'http://localhost:3000/recipe';
 
     remove(ingredients, {name: ''});
     directions = without(directions, '');
@@ -128,13 +133,13 @@ class WriteRecipeForm extends Component {
     });
     
     var request = {
-      method: 'POST',
+      method: this.state._id ? 'PUT' :'POST',
       headers: myHeaders,
       mode: 'cors',
       body: JSON.stringify(formPayload)
     }
 
-    fetch('http://localhost:3000/recipe', request).then(function(response) {
+    fetch(endpoint, request).then(function(response) {
       return response.json();
     }).then(function(data) { 
       writeRecipeFormController.props.toggleWriteRecipeForm();

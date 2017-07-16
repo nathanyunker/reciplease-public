@@ -37,6 +37,10 @@ class RecipeList extends React.Component {
       recipeListController.setState({ recipes: data });
     });
   }
+
+  updateRecipe(recipe) {
+    this.props.setSelectedRecipe(recipe);
+  }
  
   render() {
     return (
@@ -45,8 +49,8 @@ class RecipeList extends React.Component {
         <div>
           {this.state.recipes.map((recipe, idx) => {
             return(
-              <div onClick={() => this.props.setSelectedRecipe(recipe)} key={"recipe"+idx}>
-                <span>{recipe.name}</span>
+              <div key={"recipe"+idx}>
+                <span onClick={() => this.updateRecipe(recipe)}>{recipe.name}</span>
                 <button className="btn" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(idx)}>
                   X
                 </button>

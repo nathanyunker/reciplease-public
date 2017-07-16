@@ -7,6 +7,7 @@ class WriteRecipe extends React.Component {
     super(props);
     
     this.state = {
+      recipe: {}
     };
   }
  
@@ -14,7 +15,7 @@ class WriteRecipe extends React.Component {
     return (
       <div className="container">
         <div>Add A Recipe:</div>
-        <WriteRecipeForm toggleWriteRecipeForm={this.props.toggleWriteRecipeForm}/>
+        <WriteRecipeForm selectedRecipe={this.props.selectedRecipe} toggleWriteRecipeForm={this.props.toggleWriteRecipeForm}/>
       </div>
     );
   }
