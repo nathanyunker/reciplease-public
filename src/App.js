@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router'
 
-import Recipe from './scenes/Recipe/Recipe';
-import WriteRecipe from './scenes/Recipe/WriteRecipe/WriteRecipe';
-import AppNavBar from './components/Nav';
+import Recipe from './scenes/Recipe/Recipe'
+import WriteRecipe from './scenes/Recipe/WriteRecipe/WriteRecipe'
+import AppNavBar from './components/Nav'
 
 const Home = () => (
   <div className="container">

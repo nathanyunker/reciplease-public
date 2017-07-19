@@ -8,9 +8,6 @@ class RecipeList extends React.Component {
     this.state = {
       recipes: []
     };
-
-    this.retrieveRecipes = this.retrieveRecipes.bind(this);
-    this.retrieveRecipes();
   }
 
   deleteRecipe(index) {
@@ -27,17 +24,6 @@ class RecipeList extends React.Component {
     });
   }
 
-  retrieveRecipes() {
-    var recipeListController = this;
-    fetch('http://localhost:3000/recipe', {
-      method: 'get'
-    }).then(function(response) {
-      return response.json();
-    }).then(function(data) { 
-      recipeListController.setState({ recipes: data });
-    });
-  }
-
   updateRecipe(recipe) {
     this.props.setSelectedRecipe(recipe);
   }
@@ -47,7 +33,7 @@ class RecipeList extends React.Component {
       <div className="recipe-list-container">
         <input type="submit" value="Add Recipe" onClick={this.props.toggleWriteRecipeForm} />
         <div>
-          {this.state.recipes.map((recipe, idx) => {
+          {this.props.recipes.map((recipe, idx) => {
             return(
               <div key={"recipe"+idx}>
                 <span onClick={() => this.updateRecipe(recipe)}>{recipe.name}</span>
