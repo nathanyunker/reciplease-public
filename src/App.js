@@ -3,7 +3,8 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom'
 import { Redirect } from 'react-router'
 
 import Recipe from './scenes/Recipe/Recipe'
-import WriteRecipe from './scenes/Recipe/WriteRecipe/WriteRecipe'
+import RecipeList from './scenes/RecipeList/RecipeList'
+import WriteRecipe from './scenes/WriteRecipe/WriteRecipe'
 import AppNavBar from './components/Nav'
 
 const Home = () => (
@@ -59,12 +60,13 @@ class App extends Component {
     	<Router>
 		    <div>
 		      <AppNavBar/>
-
 		      <Route exact path="/home" component={Home}/>
 		      <Route path="/about" component={About}/>
 		      <Route path="/topics" component={Topics}/>
 		      <Route path="/recipe" component={Recipe}/>
-          <Redirect from="/" to="/recipe" />
+          <Route path="/recipe-list" component={RecipeList}/>
+          <Route path="/write-recipe/:id" component={WriteRecipe}/>
+          <Redirect from="/" to="/recipe-list" />
 		    </div>
 		  </Router>
     )

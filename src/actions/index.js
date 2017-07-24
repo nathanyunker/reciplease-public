@@ -12,6 +12,18 @@ export function fetchRecipes() {
   }
 }
 
+export function fetchRecipe(recipeId) {
+  return function(dispatch) {
+    fetch('http://localhost:3000/recipes/'+ recipeId, {
+      method: 'get'
+    }).then(function(response) {
+        return response.json();
+    }).then(function(data) { 
+      dispatch({type: "RECIEVE_RECIPE", payload: data});
+    });
+  }
+}
+
 export function changeRecipeName(name) {
   return {
     type: 'CHANGE_RECIPE_NAME',
