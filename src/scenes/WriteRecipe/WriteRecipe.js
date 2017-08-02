@@ -26,7 +26,7 @@ class WriteRecipe extends React.Component {
   render() {
     return (
       <div className="container">
-        <div>Add A Recipe:</div>
+        <h2>{this.props.match.params.id ? "Update A Recipe:": "Add A Recipe:"}</h2>
         <WriteRecipeForm recipe={this.props.recipe}/>
       </div>
     );

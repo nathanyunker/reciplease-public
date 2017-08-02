@@ -24,9 +24,6 @@ class AppNavBar extends React.Component {
           <LinkContainer to="/write-recipe">
             <NavItem eventKey={3}>Write Recipe</NavItem>
           </LinkContainer>
-          <LinkContainer to="/recipe">
-            <NavItem eventKey={4}>Add a Recipe</NavItem>
-          </LinkContainer>
           <LinkContainer to="/topics">
             <NavItem eventKey={5}>Topics</NavItem>
           </LinkContainer>
