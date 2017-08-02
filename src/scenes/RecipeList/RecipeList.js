@@ -15,28 +15,36 @@ class RecipeList extends React.Component {
     this.state = {
       recipes: []
     };
+
+    this.retrieveRecipes = this.retrieveRecipes.bind(this);
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchRecipes());
+    this.retrieveRecipes();
   }
 
-  deleteRecipe(index) {
-    var recipeListController = this;
-    var recipeId = this.state.recipes[index]._id;
+  deleteRecipe(recipeId) {
+    let recipeListController = this;
 
     fetch('http://localhost:3000/recipes/' + recipeId, {
       method: 'delete'
     }).then(function(response) {
         return response.json();
-    }).then(function(data) { 
-      remove(recipeListController.state.recipes, {_id: recipeId});
-      recipeListController.setState({ recipes: recipeListController.state.recipes });
+    }).then(function(data) {
+      recipeListController.retrieveRecipes();
     });
   }
 
-  updateRecipe(recipe) {
+  retrieveRecipes() {
+    this.props.dispatch(fetchRecipes());
+  }
+
+  static updateRecipe(recipe) {
     window.location = '#/write-recipe/'+recipe._id;
+  }
+
+  static writeRecipe() {
+    window.location = '#/write-recipe';
   }
  
   render() {
@@ -44,13 +52,13 @@ class RecipeList extends React.Component {
       <div className="container">
         <h2>Recipes:</h2>
         <div className="recipe-list-container">
-          <input type="submit" value="Add Recipe" onClick={this.props.toggleWriteRecipeForm} />
+          <input type="submit" value="Add Recipe" onClick={() => RecipeList.writeRecipe()} />
           <div>
             {this.props.recipe.recipes.map((recipe, idx) => {
               return(
                 <div key={"recipe"+idx}>
-                  <span onClick={() => this.updateRecipe(recipe)}>{recipe.name}</span>
-                  <button className="btn" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(idx)}>
+                  <span onClick={() => RecipeList.updateRecipe(recipe)}>{recipe.name}</span>
+                  <button className="btn" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(recipe._id)}>
                     X
                   </button>
                 </div>

@@ -17,9 +17,10 @@ class WriteRecipe extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.dir('recipe id, write recipe', this.props.match.params.id);
-    this.props.dispatch(fetchRecipe(this.props.match.params.id));
+  componentWillMount() {
+    if (this.props.match.params.id) {
+      this.props.dispatch(fetchRecipe(this.props.match.params.id));
+    }
   }
  
   render() {

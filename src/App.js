@@ -12,19 +12,19 @@ const Home = () => (
     <h2>Home</h2>
     <div>Here is a site where we can record recipes, calories, and banking</div>
   </div>
-)
+);
 
 const About = () => (
   <div className="container">
     <h2>About</h2>
   </div>
-)
+);
 
 const Topic = ({ match }) => (
   <div className="container">
     <h3>{match.params.topicId}</h3>
   </div>
-)
+);
 
 const Topics = ({ match }) => (
   <div className="container">
@@ -65,7 +65,7 @@ class App extends Component {
 		      <Route path="/topics" component={Topics}/>
 		      <Route path="/recipe" component={Recipe}/>
           <Route path="/recipe-list" component={RecipeList}/>
-          <Route path="/write-recipe/:id" component={WriteRecipe}/>
+          <Route path="/write-recipe/:id?" component={WriteRecipe}/>
           <Redirect from="/" to="/recipe-list" />
 		    </div>
 		  </Router>

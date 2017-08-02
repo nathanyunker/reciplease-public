@@ -10,7 +10,7 @@ class WriteRecipe extends React.Component {
       recipe: {}
     };
   }
- 
+
   render() {
     return (
       <div className="container">

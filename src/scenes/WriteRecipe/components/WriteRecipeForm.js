@@ -56,7 +56,7 @@ class WriteRecipeForm extends Component {
 
   deleteDirection(e, index) {
     e.preventDefault();
-    var inputs = this.state.directions;
+    let inputs = this.state.directions;
     inputs.splice(index, 1);
     this.setState({
       directions: inputs
@@ -65,18 +65,15 @@ class WriteRecipeForm extends Component {
   
   deleteIngredient(e, index) {
     e.preventDefault();
-    var inputs = this.state.ingredients;
+    let inputs = this.state.ingredients;
     inputs.splice(index, 1);
     this.setState({
       ingredients: inputs
     });
   }
 
-  componentDidMount() {
-    console.log('this.props', this.props);
-    if (!isEmpty(this.props.recipe)) {
-      this.setState(this.props.recipe);
-    }
+  componentWillReceiveProps(newProps) {
+    this.setState(newProps.recipe);
   }
 
   handleCalorieCountChange(e) {
@@ -110,10 +107,9 @@ class WriteRecipeForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    var writeRecipeFormController = this;
-    var ingredients = this.state.ingredients;
-    var directions = this.state.directions;
-    var endpoint = this.state._id ? 'http://localhost:3000/recipes/' + this.state._id : 'http://localhost:3000/recipe';
+    let ingredients = this.state.ingredients;
+    let directions = this.state.directions;
+    let endpoint = this.state._id ? 'http://localhost:3000/recipes/' + this.state._id : 'http://localhost:3000/recipe';
 
     remove(ingredients, {name: ''});
     directions = without(directions, '');
@@ -128,30 +124,30 @@ class WriteRecipeForm extends Component {
       sourceLink: this.state.sourceLink
     };
 
-    var myHeaders = new Headers({
+    let myHeaders = new Headers({
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     });
     
-    var request = {
+    let request = {
       method: this.state._id ? 'PUT' :'POST',
       headers: myHeaders,
       mode: 'cors',
       body: JSON.stringify(formPayload)
-    }
+    };
 
     fetch(endpoint, request).then(function(response) {
       return response.json();
-    }).then(function(data) { 
+    }).then(function(data) {
+      window.location = '#/recipe-list';
       console.log('write success');
-      //writeRecipeFormController.props.toggleWriteRecipeForm();
     });
 
     this.handleClearForm(e);
   }
 
   handleIngredientMeasureChange(e, index) {
-    var ingredients = this.state.ingredients;
+    let ingredients = this.state.ingredients;
     ingredients[index].measure = e.target.value;
     this.setState({
       ingredients: ingredients
@@ -159,7 +155,7 @@ class WriteRecipeForm extends Component {
   }
 
   handleIngredientNameChange(e, index) {
-    var ingredients = this.state.ingredients;
+    let ingredients = this.state.ingredients;
     ingredients[index].name = e.target.value;
     this.setState({
       ingredients: ingredients
@@ -193,11 +189,11 @@ class WriteRecipeForm extends Component {
           <Col sm={12}>
             <FormGroup controlId="recipeSourceLink">
               <ControlLabel>Source Link</ControlLabel>
-              <FormControl 
-                onChange={this.handleSourceLinkChange}
-                type="text" 
-                placeholder="External Link"
-                value={this.state.sourceLink}/>
+              <FormControl autoComplete="off"
+                           onChange={this.handleSourceLinkChange}
+                           type="text"
+                           placeholder="External Link"
+                           value={this.state.sourceLink}/>
             </FormGroup>
           </Col>
         </Row>
@@ -205,31 +201,31 @@ class WriteRecipeForm extends Component {
           <Col sm={6}>
             <FormGroup controlId="recipeName">
               <ControlLabel>Recipe Name</ControlLabel>
-              <FormControl 
-                onChange={this.handleNameChange}
-                type="text" 
-                placeholder="Name"
-                value={this.state.name}/>
+              <FormControl autoComplete="off"
+                            onChange={this.handleNameChange}
+                            type="text"
+                            placeholder="Name"
+                            value={this.state.name}/>
             </FormGroup>
             <Row>
               <Col sm={6}>
                 <FormGroup controlId="recipeCalorieCount">
                   <ControlLabel>Calorie Count</ControlLabel>
-                  <FormControl 
-                    onChange={this.handleCalorieCountChange}
-                    type="text" 
-                    placeholder="Calorie Count"
-                    value={this.state.calorieCount}/>
+                  <FormControl autoComplete="off"
+                               onChange={this.handleCalorieCountChange}
+                               type="text"
+                               placeholder="Calorie Count"
+                               value={this.state.calorieCount}/>
                 </FormGroup>
               </Col>
               <Col sm={6}>
                 <FormGroup controlId="numberOfServings">
                   <ControlLabel>No. of Servince</ControlLabel>
-                  <FormControl 
-                    onChange={this.handleNumberOfServingsChange}
-                    type="text" 
-                    placeholder="No. of Servings"
-                    value={this.state.numberOfServings}/>
+                  <FormControl autoComplete="off"
+                               onChange={this.handleNumberOfServingsChange}
+                               type="text"
+                               placeholder="No. of Servings"
+                               value={this.state.numberOfServings}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -245,10 +241,10 @@ class WriteRecipeForm extends Component {
                     <Row key={"direction-container"+idx}>
                       <Col sm={10}>
                         <FormGroup controlId="recipeDirection">
-                          <FormControl 
-                            onChange={(e) => this.handleDirectionChange(e, idx)}
-                            componentClass="textarea" 
-                            value={direction}/>
+                          <FormControl autoComplete="off"
+                                       onChange={(e) => this.handleDirectionChange(e, idx)}
+                                       componentClass="textarea"
+                                       value={direction}/>
                         </FormGroup>
                       </Col>
                       <Col sm={2}>
@@ -270,11 +266,11 @@ class WriteRecipeForm extends Component {
           <Col sm={6}>
             <FormGroup controlId="recipeDescription">
               <ControlLabel>Recipe Description</ControlLabel>
-              <FormControl 
-                onChange={this.handleDescriptionChange}
-                componentClass="textarea" 
-                placeholder="Description"
-                value={this.state.description}/>
+              <FormControl autoComplete="off"
+                           onChange={this.handleDescriptionChange}
+                           componentClass="textarea"
+                           placeholder="Description"
+                           value={this.state.description}/>
             </FormGroup>
             <Row>
               <Col sm={3}>
@@ -294,26 +290,26 @@ class WriteRecipeForm extends Component {
                   <Row key={"ingredient-container"+idx}>
                   <Col sm={3}>
                       <FormGroup controlId="ingredientValue">
-                        <FormControl 
-                          onChange={(e) => this.handleIngredientValueChange(e, idx)}
-                          type="text"
-                          value={ingredient.value}/>
+                        <FormControl autoComplete="off"
+                                     onChange={(e) => this.handleIngredientValueChange(e, idx)}
+                                     type="text"
+                                     value={ingredient.value}/>
                       </FormGroup>
                     </Col>
                     <Col sm={3}>
                       <FormGroup controlId="ingredientMeasure">
-                        <FormControl 
-                          onChange={(e) => this.handleIngredientMeasureChange(e, idx)}
-                          type="text"
-                          value={ingredient.measure}/>
+                        <FormControl autoComplete="off"
+                                     onChange={(e) => this.handleIngredientMeasureChange(e, idx)}
+                                     type="text"
+                                     value={ingredient.measure}/>
                       </FormGroup>
                     </Col>
                     <Col sm={4}>
                       <FormGroup controlId="ingredientName">
-                        <FormControl 
-                          onChange={(e) => this.handleIngredientNameChange(e, idx)}
-                          type="text"
-                          value={ingredient.name}/>
+                        <FormControl autoComplete="off"
+                                     onChange={(e) => this.handleIngredientNameChange(e, idx)}
+                                     type="text"
+                                     value={ingredient.name}/>
                       </FormGroup>
                     </Col>
                     <Col sm={2}>

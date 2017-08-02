@@ -18,7 +18,8 @@ export function fetchRecipe(recipeId) {
       method: 'get'
     }).then(function(response) {
         return response.json();
-    }).then(function(data) { 
+    }).then(function(data) {
+      console.log('Hooray it works?', data);
       dispatch({type: "RECIEVE_RECIPE", payload: data});
     });
   }
