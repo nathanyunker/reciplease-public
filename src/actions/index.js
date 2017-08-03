@@ -19,18 +19,7 @@ export function fetchRecipe(recipeId) {
     }).then(function(response) {
         return response.json();
     }).then(function(data) {
-      console.log('Hooray it works?', data);
       dispatch({type: "RECIEVE_RECIPE", payload: data});
     });
-  }
-}
-
-export function changeRecipeName(name) {
-  return {
-    type: 'CHANGE_RECIPE_NAME',
-    payload: {
-    	name: "Nathan",
-    	age: 27
-    }
   }
 }

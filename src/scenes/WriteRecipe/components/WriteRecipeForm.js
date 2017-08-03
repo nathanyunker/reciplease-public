@@ -140,7 +140,6 @@ class WriteRecipeForm extends Component {
       return response.json();
     }).then(function(data) {
       window.location = '#/recipe-list';
-      console.log('write success');
     });
 
     this.handleClearForm(e);
