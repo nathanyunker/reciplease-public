@@ -109,7 +109,7 @@ class WriteRecipeForm extends Component {
     e.preventDefault();
     let ingredients = this.state.ingredients;
     let directions = this.state.directions;
-    let endpoint = this.state._id ? 'http://localhost:3000/recipes/' + this.state._id : 'http://localhost:3000/recipe';
+    let endpoint = this.state._id ? 'http://localhost:3000/recipe/' + this.state._id : 'http://localhost:3000/recipes';
 
     remove(ingredients, {name: ''});
     directions = without(directions, '');
