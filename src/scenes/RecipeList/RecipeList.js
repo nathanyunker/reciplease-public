@@ -2,6 +2,7 @@ import React from 'react';
 import remove from 'lodash/remove'
 import styles from './recipeList.less';
 import { connect } from 'react-redux'
+import { Button, Col, ControlLabel, FormControl, FormGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import { fetchRecipes } from '../../actions/index.js'
  
 @connect((store) => {
@@ -53,19 +54,22 @@ class RecipeList extends React.Component {
       <div className="container">
         <h2>Recipes:</h2>
         <div className="recipe-list-container">
-          <input type="submit" value="Add Recipe" onClick={() => RecipeList.writeRecipe()} />
-          <div>
+          <Button value="Add Recipe" onClick={() => RecipeList.writeRecipe()} >Add Recipe</Button>
+          <ListGroup>
             {this.props.recipe.recipes.map((recipe, idx) => {
               return(
-                <div key={"recipe"+idx}>
-                  <span onClick={() => RecipeList.updateRecipe(recipe)}>{recipe.name}</span>
-                  <button className="btn" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(recipe._id)}>
-                    X
-                  </button>
-                </div>
+                <ListGroupItem key={"recipe"+idx}>
+
+                  <FormGroup controlId="formValidationError2" >
+                    <ControlLabel onClick={() => RecipeList.updateRecipe(recipe)}>{recipe.name}</ControlLabel>
+                    <Button className="btn pull-right" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(recipe._id)}>
+                        X
+                      </Button>
+                  </FormGroup>
+                </ListGroupItem>
               )
             })} 
-          </div>
+          </ListGroup>
         </div>
       </div>
     );
