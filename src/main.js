@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import store from "./store.js"
-import App from './app'
+import Appplease from './app'
  
 render(
   <Provider store={store}>
