@@ -1,4 +1,6 @@
 let recipeName = '';
+console.log('LETS PRINT OUT OUR ENVIRONMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+console.log('HERE IT IS!!!!-------------------------', process.env.NODE_ENV)
 let domainName = process.env.NODE_ENV === 'production' ? 'https://ancient-eyrie-66439.herokuapp.com' : 'http://localhost:3000';
 
 export function fetchRecipes() {
