@@ -5,7 +5,7 @@ import { Redirect } from 'react-router'
 import RecipeList from './scenes/RecipeList/RecipeList'
 import AppNavBar from './components/Nav'
 
-class App extends Component {
+class AppLoad extends Component {
   render() {
     return (
     	<Router>
@@ -14,9 +14,9 @@ class App extends Component {
           <Route path="/recipe-list" component={RecipeList}/>
           <Redirect from="/" to="/recipe-list" />
 		    </div>
-		  </Router>
+		  </Router> 
     )
   }
 }
 
-export default App
+export default AppLoad
