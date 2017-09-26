@@ -2,12 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import store from "./store1.js"
-import App from './app'
+import store from "./store.js"
+import AppLoad from './appLoad'
  
 render(
   <Provider store={store}>
-    <App/>
+    <AppLoad/>
   </Provider>,
   document.getElementById('root')
 )
