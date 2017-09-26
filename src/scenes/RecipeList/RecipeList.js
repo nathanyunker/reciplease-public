@@ -1,5 +1,6 @@
 import React from 'react';
 import remove from 'lodash/remove'
+import styles from 'recipeList.less';
 import { connect } from 'react-redux'
 import { fetchRecipes } from '../../actions/index.js'
  
