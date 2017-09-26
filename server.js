@@ -17,8 +17,6 @@ app.use(webpackDevMiddleware(compiler, {
   },
   historyApiFallback: true,
 }));
-
-console.log('OUR CURRENT ENVIRONMENT IS---------------------', process.env.NODE_ENV);
  
 const server = app.listen(process.env.PORT || 8080, function() {
   const host = server.address().address;

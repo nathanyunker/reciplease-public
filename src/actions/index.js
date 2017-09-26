@@ -1,8 +1,9 @@
 let recipeName = '';
+let domainName = process.env.NODE_ENV === 'production' ? 'https://ancient-eyrie-66439.herokuapp.com' : 'http://localhost:3000';
 
 export function fetchRecipes() {
   return function(dispatch) {
-  	fetch('http://localhost:3000/recipes', {
+  	fetch(domainName + '/recipes', {
       method: 'get'
     }).then(function(response) {
         return response.json();
@@ -14,7 +15,7 @@ export function fetchRecipes() {
 
 export function fetchRecipe(recipeId) {
   return function(dispatch) {
-    fetch('http://localhost:3000/recipe/'+ recipeId, {
+    fetch(domainName + '/recipe/'+ recipeId, {
       method: 'get'
     }).then(function(response) {
         return response.json();
