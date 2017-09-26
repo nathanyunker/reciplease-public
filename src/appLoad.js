@@ -53,7 +53,7 @@ const Topics = ({ match }) => (
   </div>
 );
 
-class AppLoad extends Component {
+class App extends Component {
   render() {
     return (
     	<Router>
@@ -71,4 +71,4 @@ class AppLoad extends Component {
   }
 }
 
-export default AppLoad
+export default App

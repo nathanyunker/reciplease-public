@@ -3,11 +3,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import store from "./store.js"
-import AppLoad from './appLoad'
+import App from './appLoad'
  
 render(
   <Provider store={store}>
-    <AppLoad/>
+    <App/>
   </Provider>,
   document.getElementById('root')
 )
