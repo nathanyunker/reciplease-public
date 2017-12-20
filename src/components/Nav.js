@@ -15,20 +15,20 @@ class AppNavBar extends React.Component {
     return (
       <Navbar>
         <Nav>
+          <LinkContainer to="/sign-in">
+            <NavItem eventKey={1}>Sign In</NavItem>
+          </LinkContainer>
           <LinkContainer to="/home">
-            <NavItem eventKey={1}>Home</NavItem>
+            <NavItem eventKey={2}>Home</NavItem>
           </LinkContainer>
           <LinkContainer to="/recipe-list">
-            <NavItem eventKey={2}>Recipe List</NavItem>
+            <NavItem eventKey={3}>Recipe List</NavItem>
           </LinkContainer>
           <LinkContainer to="/write-recipe">
-            <NavItem eventKey={3}>Write Recipe</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/topics">
-            <NavItem eventKey={5}>Topics</NavItem>
+            <NavItem eventKey={4}>Write Recipe</NavItem>
           </LinkContainer>
           <LinkContainer to="/about">
-            <NavItem eventKey={6}>About</NavItem>
+            <NavItem eventKey={5}>About</NavItem>
           </LinkContainer>
         </Nav>
       </Navbar>

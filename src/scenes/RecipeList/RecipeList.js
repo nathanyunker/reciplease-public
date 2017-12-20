@@ -52,23 +52,37 @@ class RecipeList extends React.Component {
   render() {
     return (
       <div className="container">
-        <h2>Recipes:</h2>
+        <Row>
+          <Col sm={6}>
+            <h3>Recipes:</h3>
+          </Col>
+          <Col sm={6}>
+            <div className="h3-margin">
+              <Button value="Add Recipe" className="pull-right" onClick={() => RecipeList.writeRecipe()} >Add Recipe</Button>
+            </div>
+          </Col>
+        </Row>
         <div className="recipe-list-container">
-          <Button value="Add Recipe" onClick={() => RecipeList.writeRecipe()} >Add Recipe</Button>
           <ListGroup>
-            {this.props.recipe.recipes.map((recipe, idx) => {
-              return(
-                <ListGroupItem key={"recipe"+idx}>
-
-                  <FormGroup controlId="formValidationError2" >
-                    <ControlLabel onClick={() => RecipeList.updateRecipe(recipe)}>{recipe.name}</ControlLabel>
-                    <Button className="btn pull-right" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(recipe._id)}>
-                        X
-                      </Button>
-                  </FormGroup>
-                </ListGroupItem>
-              )
-            })} 
+            {
+              this.props.recipe.recipes ? this.props.recipe.recipes.map((recipe, idx) => {
+                return(
+                  <ListGroupItem key={"recipe"+idx}>
+                      <Row>
+                        <Col sm={6}>
+                          <h4 onClick={() => RecipeList.updateRecipe(recipe)}>{recipe.name}</h4>
+                        </Col>
+                        <Col sm={6}>
+                          <div className="h4-margin">
+                            <Button className="btn pull-right" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(recipe._id)}>X</Button>
+                          </div>
+                        </Col>
+                      </Row>
+                  </ListGroupItem>
+                )
+              })
+              :<div>Please Authenticate to see Recipes</div>
+            } 
           </ListGroup>
         </div>
       </div>

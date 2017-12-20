@@ -4,10 +4,13 @@ export function fetchRecipes() {
   return function(dispatch) {
   	fetch('http://localhost:3000/recipes', {
       method: 'get'
-    }).then(function(response) {
+    })
+    .then(function(response) {
+      console.log('WHATS THE RESPONSE',response.json())
         return response.json();
-    }).then(function(data) { 
-    	dispatch({type: "RECIEVE_RECIPES", payload: data});
+    })
+    .then(function(data) { 
+    	  dispatch({type: "RECIEVE_RECIPES", payload: data});
     });
   }
 }
