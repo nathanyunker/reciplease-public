@@ -14,36 +14,29 @@ class SignIn extends React.Component {
 
     this.state = {
       password: '',
-      username: ''
+      email: ''
     };
 
     this.authenticate = this.authenticate.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-  }
-
-  componentWillMount() {
-    // this.setState({
-    //   password: '',
-    //   username: ''
-    // });
+    this.handleEmailChange = this.handleEmailChange.bind(this);
   }
 
   signUp() {
-    console.log('send in the user name and password');
+    console.log('send in the email and password');
   }
 
   authenticate(e) {
     e.preventDefault();
-    const endpoint = 'http://localhost:3000/login'
+    const endpoint = 'http://localhost:3000/user/authenticate'
     console.log('THE STATE', this);
 
     const formPayload = {
-      username: this.state.username,
+      email: this.state.email,
       password: this.state.password
     };
 
-    console.log('THE USER NAME', formPayload.username);
+    console.log('THE email NAME', formPayload.email);
     console.log('THE PASSWORD', formPayload.password);
 
     let myHeaders = new Headers({
@@ -72,7 +65,7 @@ class SignIn extends React.Component {
   handleClearForm(e) {
     e.preventDefault();
     this.setState({
-      username: '',
+      email: '',
       password: ''
     });
   }
@@ -81,8 +74,8 @@ class SignIn extends React.Component {
     this.setState({ password: e.target.value });
   }
 
-  handleUsernameChange(e) {
-    this.setState({ username: e.target.value });
+  handleEmailChange(e) {
+    this.setState({ email: e.target.value });
   }
 
   render() {
@@ -90,16 +83,16 @@ class SignIn extends React.Component {
       <div className="container">
         <div className="half-width"> 
           <Form horizontal onSubmit={this.authenticate}>
-            <FormGroup controlId="formHorizontalUsername">
+            <FormGroup controlId="formHorizontalEmail">
               <Col componentClass={ControlLabel} sm={2} >
-                Username
+                Email
               </Col>
               <Col sm={10}>
                 <FormControl autoComplete="off"
-                            onChange={this.handleUsernameChange}
+                            onChange={this.handleEmailChange}
                             type="text"
-                            placeholder="Username"
-                            value={this.state.username}/>
+                            placeholder="Email"
+                            value={this.state.email}/>
               </Col>
             </FormGroup>
 
