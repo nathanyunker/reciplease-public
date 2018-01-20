@@ -80,8 +80,8 @@ class RecipeList extends React.Component {
                       </Row>
                   </ListGroupItem>
                 )
-              })
-              :<div>Please Authenticate to see Recipes</div>
+              }) :
+              <div>Please Authenticate to see Recipes</div>
             } 
           </ListGroup>
         </div>

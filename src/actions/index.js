@@ -6,7 +6,6 @@ export function fetchRecipes() {
       method: 'get'
     })
     .then(function(response) {
-      console.log('WHATS THE RESPONSE',response.json())
         return response.json();
     })
     .then(function(data) { 

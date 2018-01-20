@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 
 import RecipeList from './scenes/RecipeList/RecipeList';
 import WriteRecipe from './scenes/WriteRecipe/WriteRecipe';
-import SignIn from './scenes/SignIn/SignIn';
+import Auth from './scenes/Auth/Auth';
 import AppNavBar from './components/Nav';
 
 const Home = () => (
@@ -14,24 +14,28 @@ const Home = () => (
   </div>
 );
 
-const About = () => (
-  <div className="container">
-    <h2>About</h2>
-  </div>
-);
-
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loggedIn: !!window.sessionStorage.getItem('recipleaseToken')
+    };
+  } 
+
   render() {
     return (
     	<Router>
 		    <div>
 		      <AppNavBar/>
 		      <Route exact path="/home" component={Home}/>
-		      <Route path="/about" component={About}/>
-		      <Route path="/sign-in" component={SignIn}/>
+		      <Route path="/sign-in" component={Auth}/>
           <Route path="/recipe-list" component={RecipeList}/>
           <Route path="/write-recipe/:id?" component={WriteRecipe}/>
-          <Redirect from="/" to="/recipe-list" />
+          {!this.state.loggedIn ?
+            <Redirect from="/" to="/sign-in" /> :
+            <Redirect from="/" to="/recipe-list" />
+          }
 		    </div>
 		  </Router>
     )
