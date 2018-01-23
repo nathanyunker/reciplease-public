@@ -6,18 +6,32 @@ import { LinkContainer } from 'react-router-bootstrap';
 class AppNavBar extends React.Component {
   constructor() {
     super();
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    
     this.state = {
+      authenticated: window.sessionStorage.getItem('recipleaseToken')
     };
+  }
+
+  handleLogoutClick() {
+    window.sessionStorage.clear();
+    this.setState({authenticated: false});
   }
 
  
   render() {
+    const authenticated = this.state.authenticated;
+
+    let auth = null;
+    if (authenticated) {
+      auth = <NavItem eventKey={1} onClick={this.handleLogoutClick}>Sign Out</NavItem>;
+    } else {
+      auth = <NavItem eventKey={1}>Sign In</NavItem>;
+    }
+
     return (
       <Navbar>
         <Nav>
-          <LinkContainer to="/sign-in">
-            <NavItem eventKey={1}>Sign In</NavItem>
-          </LinkContainer>
           <LinkContainer to="/home">
             <NavItem eventKey={2}>Home</NavItem>
           </LinkContainer>
@@ -29,6 +43,9 @@ class AppNavBar extends React.Component {
           </LinkContainer>
           <LinkContainer to="/about">
             <NavItem eventKey={5}>About</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/sign-in">
+            {auth}
           </LinkContainer>
         </Nav>
       </Navbar>
