@@ -1,5 +1,12 @@
 let recipeName = '';
 
+export function getToken(recipeId) {
+  return function(dispatch) {
+    console.log('sENT THE DISPATCH');
+    dispatch({type: "GET_TOKEN", payload: window.sessionStorage.getItem('recipleaseToken')});
+  }
+}
+
 export function fetchRecipes() {
   return function(dispatch) {
   	fetch('http://localhost:3000/recipes', {

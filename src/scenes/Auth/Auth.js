@@ -5,11 +5,13 @@ import size from 'lodash/size';
 import { connect } from 'react-redux';
 import SignInForm from './components/SignInForm';
 import SignUpForm from './components/SignUpForm';
+import { getToken } from '../../actions/index.js'
 
 let errors;
 
 @connect((store) => {
   return {
+    token: store.token
   }
 }) 
 class Auth extends React.Component {
@@ -25,6 +27,7 @@ class Auth extends React.Component {
     this.authenticate = this.authenticate.bind(this);
     this.signUp = this.signUp.bind(this);
     this.openSignUpForm = this.openSignUpForm.bind(this);
+    this.getToken = this.getToken.bind(this);
   }
 
   openSignUpForm(e) {
@@ -33,6 +36,10 @@ class Auth extends React.Component {
     this.setState({ currentForm: 'signUp'});
 
     console.log('send in the email and password');
+  }
+
+  getToken() {
+    this.props.dispatch(getToken());
   }
 
   signUp(e, user) {
@@ -83,7 +90,7 @@ class Auth extends React.Component {
   authenticate(e, user) {
     if(e) {e.preventDefault()};
     const endpoint = 'http://localhost:3000/user/authenticate'
-    let controller = this;
+    let self = this;
     console.log('THIS',this);
 
     console.log('THE USER', user)
@@ -110,12 +117,14 @@ class Auth extends React.Component {
       })
       .then(function(data) {
         if (size(data.messages) > 0) {
-          controller.setState({ errors: data.messages});
+          self.setState({ errors: data.messages});
         } else {
           //Handle saving user token
-          controller.setState({user: data.user});
+          self.setState({user: data.user});
           window.sessionStorage.setItem('recipleaseToken', data.token);
-          controller.child.clearForm();
+          self.getToken();
+          self.child.clearForm();
+          location.reload();
         }
       })
       .catch(function(error) {

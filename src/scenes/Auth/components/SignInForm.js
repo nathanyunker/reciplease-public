@@ -33,7 +33,6 @@ class SignInForm extends Component {
     }
 
     clearForm() {
-        console.log('SHOULD CALL HERE');
         this.setState({
             email: '',
             password: ''

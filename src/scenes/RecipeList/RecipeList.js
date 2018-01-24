@@ -25,7 +25,7 @@ class RecipeList extends React.Component {
   }
 
   deleteRecipe(recipeId) {
-    let recipeListController = this;
+    let self = this;
 
     fetch('http://localhost:3000/recipe/' + recipeId, {
       method: 'delete'
@@ -33,7 +33,7 @@ class RecipeList extends React.Component {
         return response.json();
     }).then(function(data) {
       console.log('data', data);
-      recipeListController.retrieveRecipes();
+      self.retrieveRecipes();
     });
   }
 
