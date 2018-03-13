@@ -69,10 +69,13 @@ class RecipeList extends React.Component {
                 return(
                   <ListGroupItem key={"recipe"+idx}>
                       <Row>
+                        <Col sm={4}>
+                          <img className="sm-img-container" onClick={() => RecipeList.updateRecipe(recipe)} src={recipe.imageLink} alt={recipe.name}/>
+                        </Col>
                         <Col sm={6}>
                           <h4 onClick={() => RecipeList.updateRecipe(recipe)}>{recipe.name}</h4>
                         </Col>
-                        <Col sm={6}>
+                        <Col sm={2}>
                           <div className="h4-margin">
                             <Button className="btn pull-right" key={"remove-recipe"+idx} onClick={(e) => this.deleteRecipe(recipe._id)}>X</Button>
                           </div>
