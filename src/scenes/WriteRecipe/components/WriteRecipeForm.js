@@ -18,6 +18,7 @@ class WriteRecipeForm extends Component {
       ingredients: [{name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}],
       name: '',
       numberOfServings: '',
+      imageLink: '',
       sourceLink: ''
     };
 
@@ -34,6 +35,7 @@ class WriteRecipeForm extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNumberOfServingsChange = this.handleNumberOfServingsChange.bind(this);
     this.handleSourceLinkChange = this.handleSourceLinkChange.bind(this);
+    this.handleImageLinkChange = this.handleImageLinkChange.bind(this);
   }
 
   addDirection(e) {
@@ -89,6 +91,7 @@ class WriteRecipeForm extends Component {
       ingredients: [{name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}, {name:'', measure: '', value: ''}],
       name: '',
       numberOfServings: '',
+      imageLink: '',
       sourceLink: ''
     });
   }
@@ -121,6 +124,7 @@ class WriteRecipeForm extends Component {
       ingredients: ingredients,
       name: this.state.name,
       numberOfServings: this.state.numberOfServings,
+      imageLink: this.state.imageLink,
       sourceLink: this.state.sourceLink
     };
 
@@ -177,6 +181,10 @@ class WriteRecipeForm extends Component {
     this.setState({ numberOfServings: e.target.value });
   }
 
+  handleImageLinkChange(e) {
+    this.setState({ imageLink: e.target.value });
+  }
+
   handleSourceLinkChange(e) {
     this.setState({ sourceLink: e.target.value });
   }
@@ -185,7 +193,7 @@ class WriteRecipeForm extends Component {
     return (
       <Form className="container" onSubmit={this.handleFormSubmit}>
         <Row>
-          <Col sm={12}>
+          <Col sm={6}>
             <FormGroup controlId="recipeSourceLink">
               <ControlLabel>Source Link</ControlLabel>
               <FormControl autoComplete="off"
@@ -193,6 +201,16 @@ class WriteRecipeForm extends Component {
                            type="text"
                            placeholder="External Link"
                            value={this.state.sourceLink}/>
+            </FormGroup>
+          </Col>
+          <Col sm={6}>
+            <FormGroup controlId="recipeImageLink">
+              <ControlLabel>Image Link</ControlLabel>
+              <FormControl autoComplete="off"
+                           onChange={this.handleImageLinkChange}
+                           type="text"
+                           placeholder="Image Link"
+                           value={this.state.imageLink}/>
             </FormGroup>
           </Col>
         </Row>
@@ -329,16 +347,18 @@ class WriteRecipeForm extends Component {
           </Col>
         </Row>
         <Row>
-          <Col sm={12}>
+          <Col sm={6}>
+            <button
+              className="btn pull-right"
+              onClick={this.handleClearForm}>Clear form
+            </button>
+          </Col>
+          <Col sm={6}>
             <input
               type="submit"
               className="btn btn-primary pull-right"
               style={{'marginLeft': '10px'}}
               value="Submit"/>
-            <button
-              className="btn pull-right"
-              onClick={this.handleClearForm}>Clear form
-            </button>
           </Col>
         </Row>
       </Form>

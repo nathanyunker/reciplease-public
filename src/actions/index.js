@@ -3,14 +3,23 @@ console.log('LETS PRINT OUT OUR ENVIRONMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 console.log('HERE IT IS!!!!-------------------------', process.env.NODE_ENV);
 let domainName = process.env.NODE_ENV === 'production' ? 'https://ancient-eyrie-66439.herokuapp.com' : 'http://localhost:3000';
 
+export function getToken(recipeId) {
+  return function(dispatch) {
+    console.log('sENT THE DISPATCH');
+    dispatch({type: "GET_TOKEN", payload: window.sessionStorage.getItem('recipleaseToken')});
+  }
+}
+
 export function fetchRecipes() {
   return function(dispatch) {
   	fetch(domainName + '/recipes', {
       method: 'get'
-    }).then(function(response) {
+    })
+    .then(function(response) {
         return response.json();
-    }).then(function(data) { 
-    	dispatch({type: "RECIEVE_RECIPES", payload: data});
+    })
+    .then(function(data) { 
+    	  dispatch({type: "RECIEVE_RECIPES", payload: data});
     });
   }
 }
