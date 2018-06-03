@@ -66,7 +66,7 @@ class SignUpForm extends Component {
     render() {
         return (
           <Form horizontal onSubmit={this.signUp}>
-              <FormGroup controlId="formHorizontalEmail">
+              <FormGroup controlid="formHorizontalEmail">
                 <Col componentClass={ControlLabel} sm={2} >
                   Email
                 </Col>
@@ -78,7 +78,7 @@ class SignUpForm extends Component {
                               value={this.state.email}/>
                 </Col>
               </FormGroup>
-              <FormGroup controlId="formHorizontalPassword">
+              <FormGroup controlid="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Password
                 </Col>
@@ -90,7 +90,7 @@ class SignUpForm extends Component {
                                 value={this.state.password}/>
                 </Col>
               </FormGroup>
-              <FormGroup controlId="formHorizontalPasswordConfirm">
+              <FormGroup controlid="formHorizontalPasswordConfirm">
                 <Col componentClass={ControlLabel} sm={2}>
                   Confirm Password
                 </Col>
@@ -102,7 +102,7 @@ class SignUpForm extends Component {
                                 value={this.state.confirmPassword}/>
                 </Col>
               </FormGroup>
-              <FormGroup controlId="form-submit">
+              <FormGroup controlid="form-submit">
                 <Col sm={12} className="text-right">
                   <Button type="submit" >
                     Sign up
