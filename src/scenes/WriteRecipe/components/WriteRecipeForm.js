@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import without from 'lodash/without'
 import remove from 'lodash/remove'
 import isEmpty from 'lodash/isEmpty'
-import SingleInput from '../../../inputs/SingleInput';  
-import TextArea from '../../../inputs/TextArea';
 import {Col, ControlLabel, Form, FormControl, FormGroup, Row} from 'react-bootstrap';
 
 class WriteRecipeForm extends Component { 
@@ -194,7 +192,7 @@ class WriteRecipeForm extends Component {
       <Form className="container" onSubmit={this.handleFormSubmit}>
         <Row>
           <Col sm={6}>
-            <FormGroup controlId="recipeSourceLink">
+            <FormGroup controlid="recipeSourceLink">
               <ControlLabel>Source Link</ControlLabel>
               <FormControl autoComplete="off"
                            onChange={this.handleSourceLinkChange}
@@ -204,7 +202,7 @@ class WriteRecipeForm extends Component {
             </FormGroup>
           </Col>
           <Col sm={6}>
-            <FormGroup controlId="recipeImageLink">
+            <FormGroup controlid="recipeImageLink">
               <ControlLabel>Image Link</ControlLabel>
               <FormControl autoComplete="off"
                            onChange={this.handleImageLinkChange}
@@ -216,7 +214,7 @@ class WriteRecipeForm extends Component {
         </Row>
         <Row>
           <Col sm={6}>
-            <FormGroup controlId="recipeName">
+            <FormGroup controlid="recipeName">
               <ControlLabel>Recipe Name</ControlLabel>
               <FormControl autoComplete="off"
                             onChange={this.handleNameChange}
@@ -226,7 +224,7 @@ class WriteRecipeForm extends Component {
             </FormGroup>
             <Row>
               <Col sm={6}>
-                <FormGroup controlId="recipeCalorieCount">
+                <FormGroup controlid="recipeCalorieCount">
                   <ControlLabel>Calorie Count</ControlLabel>
                   <FormControl autoComplete="off"
                                onChange={this.handleCalorieCountChange}
@@ -236,7 +234,7 @@ class WriteRecipeForm extends Component {
                 </FormGroup>
               </Col>
               <Col sm={6}>
-                <FormGroup controlId="numberOfServings">
+                <FormGroup controlid="numberOfServings">
                   <ControlLabel>No. of Servince</ControlLabel>
                   <FormControl autoComplete="off"
                                onChange={this.handleNumberOfServingsChange}
@@ -257,7 +255,7 @@ class WriteRecipeForm extends Component {
                   return(
                     <Row key={"direction-container"+idx}>
                       <Col sm={10}>
-                        <FormGroup controlId="recipeDirection">
+                        <FormGroup controlid="recipeDirection">
                           <FormControl autoComplete="off"
                                        onChange={(e) => this.handleDirectionChange(e, idx)}
                                        componentClass="textarea"
@@ -281,7 +279,7 @@ class WriteRecipeForm extends Component {
             </Row>
           </Col>
           <Col sm={6}>
-            <FormGroup controlId="recipeDescription">
+            <FormGroup controlid="recipeDescription">
               <ControlLabel>Recipe Description</ControlLabel>
               <FormControl autoComplete="off"
                            onChange={this.handleDescriptionChange}
@@ -306,7 +304,7 @@ class WriteRecipeForm extends Component {
                 return(
                   <Row key={"ingredient-container"+idx}>
                   <Col sm={3}>
-                      <FormGroup controlId="ingredientValue">
+                      <FormGroup controlid="ingredientValue">
                         <FormControl autoComplete="off"
                                      onChange={(e) => this.handleIngredientValueChange(e, idx)}
                                      type="text"
@@ -314,7 +312,7 @@ class WriteRecipeForm extends Component {
                       </FormGroup>
                     </Col>
                     <Col sm={3}>
-                      <FormGroup controlId="ingredientMeasure">
+                      <FormGroup controlid="ingredientMeasure">
                         <FormControl autoComplete="off"
                                      onChange={(e) => this.handleIngredientMeasureChange(e, idx)}
                                      type="text"
@@ -322,7 +320,7 @@ class WriteRecipeForm extends Component {
                       </FormGroup>
                     </Col>
                     <Col sm={4}>
-                      <FormGroup controlId="ingredientName">
+                      <FormGroup controlid="ingredientName">
                         <FormControl autoComplete="off"
                                      onChange={(e) => this.handleIngredientNameChange(e, idx)}
                                      type="text"

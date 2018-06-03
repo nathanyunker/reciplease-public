@@ -2,7 +2,7 @@ import React from 'react';
 import remove from 'lodash/remove'
 import styles from './recipeList.less';
 import { connect } from 'react-redux'
-import { Button, Col, ControlLabel, FormControl, FormGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Button, Col, ControlLabel, FormControl, FormGroup, ListGroup, ListGroupItem, Row } from 'reactstrap';
 import { fetchRecipes } from '../../actions/index.js'
  
 @connect((store) => {

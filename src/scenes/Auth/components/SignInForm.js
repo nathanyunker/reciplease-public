@@ -1,6 +1,6 @@
 import React, {Component} from 'react'; 
 import isEmpty from 'lodash/isEmpty'
-import { Button, Checkbox, Form, FormControl, FormGroup, Col, ControlLabel } from 'react-bootstrap';
+import { Button, Form, Input, FormGroup, Col, ControlLabel } from 'reactstrap';
 
 class SignInForm extends Component { 
     constructor(props) {
@@ -55,37 +55,37 @@ class SignInForm extends Component {
 
     render() {
         return (
-            <Form horizontal onSubmit={this.authenticate}>
-                <FormGroup controlId="formHorizontalEmail">
-                    <Col componentClass={ControlLabel} sm={2} >
+            <Form>
+                <FormGroup controlid="formHorizontalEmail">
+                    <Col sm={2} >
                     Email
                     </Col>
                     <Col sm={10}>
-                    <FormControl autoComplete="off"
-                                onChange={this.handleEmailChange}
-                                type="text"
-                                placeholder="Email"
-                                value={this.state.email}/>
+                    <Input autoComplete="off"
+                           onChange={this.handleEmailChange}
+                           type="text"
+                           placeholder="Email"
+                           value={this.state.email}/>
                     </Col>
                 </FormGroup>
-                <FormGroup controlId="formHorizontalPassword">
-                    <Col componentClass={ControlLabel} sm={2}>
+                <FormGroup controlid="formHorizontalPassword">
+                    <Col sm={2}>
                     Password
                     </Col>
                     <Col sm={10}>
-                    <FormControl type="password" 
-                                    placeholder="Password" 
-                                    autoComplete="off"
-                                    onChange={this.handlePasswordChange}
-                                    value={this.state.password}/>
+                    <Input type="password" 
+                           placeholder="Password" 
+                           autoComplete="off"
+                           onChange={this.handlePasswordChange}
+                           value={this.state.password}/>
                     </Col>
                 </FormGroup>
-                <FormGroup controlId="form-submit">
+                <FormGroup controlid="form-submit">
                     <Col sm={6}>
-                    <Checkbox>Remember me</Checkbox>
+                    <div>Remember me</div>
                     </Col>
                     <Col sm={6} className="text-right">
-                    <Button type="submit" >
+                    <Button type="submit" onClick={this.authenticate}>
                         Sign In
                     </Button>
                     </Col>
