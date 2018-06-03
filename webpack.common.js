@@ -37,6 +37,10 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
+  devServer: {
+    inline:true,
+    port: process.env.PORT || 8080
+  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
