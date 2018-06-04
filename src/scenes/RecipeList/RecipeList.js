@@ -3,7 +3,7 @@ import remove from 'lodash/remove'
 import styles from './recipeList.less';
 import { connect } from 'react-redux'
 import { Button, Col, ControlLabel, FormControl, FormGroup, ListGroup, ListGroupItem, Row } from 'reactstrap';
-import { fetchRecipes } from '../../actions/index.js'
+import { fetchRecipes, deleteRecipe } from '../../actions/index.js'
  
 @connect((store) => {
   return {
@@ -25,16 +25,7 @@ class RecipeList extends React.Component {
   }
 
   deleteRecipe(recipeId) {
-    let self = this;
-
-    fetch('http://localhost:3000/recipe/' + recipeId, {
-      method: 'delete'
-    }).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-      console.log('data', data);
-      self.retrieveRecipes();
-    });
+    this.props.dispatch(deleteRecipe(recipeId));
   }
 
   retrieveRecipes() {
