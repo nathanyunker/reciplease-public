@@ -8,6 +8,9 @@ class WriteRecipeForm extends Component {
   constructor(props) {
     super(props);
 
+    console.log('WHAT ARE OUR PROPS EHHHH??', props);
+    console.log('WHAT ARE OUR THIS.PROPS EHHHH??', this.props);
+
     this.state = {
       _id:'',
       calorieCount: '',
@@ -73,7 +76,7 @@ class WriteRecipeForm extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState(newProps.recipe);
+    this.setState(newProps.recipe, newProps.saveRecipe);
   }
 
   handleCalorieCountChange(e) {
@@ -145,6 +148,8 @@ class WriteRecipeForm extends Component {
     });
 
     this.handleClearForm(e);
+
+    //this.props.saveRecipe(formPayload, this.state._id ? 'PUT' :'POST')
   }
 
   handleIngredientMeasureChange(e, index) {
