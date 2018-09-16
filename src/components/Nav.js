@@ -1,7 +1,5 @@
 import React from 'react';
-import { Route, RouteHandler, Link } from 'react-router';
-import { Button, Nav, Navbar, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, NavLink } from 'reactstrap';
  
 class AppNavBar extends React.Component {
   constructor() {
@@ -24,31 +22,19 @@ class AppNavBar extends React.Component {
 
     let auth = null;
     if (authenticated) {
-      auth = <NavItem eventKey={1} onClick={this.handleLogoutClick}>Sign Out</NavItem>;
+      auth = <div onClick={this.handleLogoutClick}>Sign Out</div>;
     } else {
-      auth = <NavItem eventKey={1}>Sign In</NavItem>;
+      auth = <div>Sign In</div>;
     }
 
     return (
-      <Navbar>
         <Nav>
-          <LinkContainer to="/home">
-            <NavItem eventKey={2}>Home</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/recipe-list">
-            <NavItem eventKey={3}>Recipe List</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/write-recipe">
-            <NavItem eventKey={4}>Write Recipe</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/about">
-            <NavItem eventKey={5}>About</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/sign-in">
-            {auth}
-          </LinkContainer>
+          <NavLink href="#/home">Reciplease</NavLink> 
+          <NavLink href="#/recipe-list">Recipe List</NavLink> 
+          <NavLink href="#/write-recipe">Write Recipe</NavLink> 
+          <NavLink href="#/about">about</NavLink> 
+          <NavLink href="#/sign-in">{auth}</NavLink>
         </Nav>
-      </Navbar>
     );
   }
 }
