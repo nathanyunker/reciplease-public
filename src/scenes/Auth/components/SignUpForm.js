@@ -1,6 +1,5 @@
 import React, {Component} from 'react'; 
-import isEmpty from 'lodash/isEmpty'
-import { Button, Form, FormControl, FormGroup, Col, ControlLabel } from 'react-bootstrap';
+import { Button, Form, FormControl, FormGroup, Col, ControlLabel } from 'reactstrap';
 
 class SignUpForm extends Component { 
     constructor(props) {
