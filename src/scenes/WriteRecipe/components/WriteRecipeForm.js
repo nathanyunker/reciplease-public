@@ -1,8 +1,9 @@
 import React, {Component} from 'react';  
 import without from 'lodash/without'
 import remove from 'lodash/remove'
-import isEmpty from 'lodash/isEmpty'
-import {Col, ControlLabel, Form, FormControl, FormGroup, Row} from 'react-bootstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
+
+import styles from '../writeRecipe.less'; //importing styles
 
 class WriteRecipeForm extends Component { 
   constructor(props) {
@@ -194,176 +195,201 @@ class WriteRecipeForm extends Component {
 
   render() {
     return (
-      <Form className="container" onSubmit={this.handleFormSubmit}>
-        <Row>
-          <Col sm={6}>
-            <FormGroup controlid="recipeSourceLink">
-              <ControlLabel>Source Link</ControlLabel>
-              <FormControl autoComplete="off"
-                           onChange={this.handleSourceLinkChange}
-                           type="text"
-                           placeholder="External Link"
-                           value={this.state.sourceLink}/>
-            </FormGroup>
-          </Col>
-          <Col sm={6}>
-            <FormGroup controlid="recipeImageLink">
-              <ControlLabel>Image Link</ControlLabel>
-              <FormControl autoComplete="off"
-                           onChange={this.handleImageLinkChange}
-                           type="text"
-                           placeholder="Image Link"
-                           value={this.state.imageLink}/>
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={6}>
-            <FormGroup controlid="recipeName">
-              <ControlLabel>Recipe Name</ControlLabel>
-              <FormControl autoComplete="off"
-                            onChange={this.handleNameChange}
-                            type="text"
-                            placeholder="Name"
-                            value={this.state.name}/>
-            </FormGroup>
-            <Row>
-              <Col sm={6}>
-                <FormGroup controlid="recipeCalorieCount">
-                  <ControlLabel>Calorie Count</ControlLabel>
-                  <FormControl autoComplete="off"
-                               onChange={this.handleCalorieCountChange}
-                               type="text"
-                               placeholder="Calorie Count"
-                               value={this.state.calorieCount}/>
-                </FormGroup>
-              </Col>
-              <Col sm={6}>
-                <FormGroup controlid="numberOfServings">
-                  <ControlLabel>No. of Servince</ControlLabel>
-                  <FormControl autoComplete="off"
-                               onChange={this.handleNumberOfServingsChange}
-                               type="text"
-                               placeholder="No. of Servings"
-                               value={this.state.numberOfServings}/>
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={10}>
-                <ControlLabel>Direction</ControlLabel>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={12}>
-                {this.state.directions.map((direction, idx) => {
-                  return(
-                    <Row key={"direction-container"+idx}>
-                      <Col sm={10}>
-                        <FormGroup controlid="recipeDirection">
-                          <FormControl autoComplete="off"
-                                       onChange={(e) => this.handleDirectionChange(e, idx)}
-                                       componentClass="textarea"
-                                       value={direction}/>
-                        </FormGroup>
-                      </Col>
-                      <Col sm={2}>
-                        <button className="btn" key={"remove-direction"+idx} onClick={(e) => this.deleteDirection(e, idx)}>
-                          X
-                        </button>
-                      </Col>
-                    </Row>
-                  )
-                })} 
-                <div>
-                  <button className="btn" onClick={this.addDirection}>
-                    Add Direction 
-                  </button>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <Col sm={6}>
-            <FormGroup controlid="recipeDescription">
-              <ControlLabel>Recipe Description</ControlLabel>
-              <FormControl autoComplete="off"
-                           onChange={this.handleDescriptionChange}
-                           componentClass="textarea"
-                           placeholder="Description"
-                           value={this.state.description}/>
-            </FormGroup>
-            <Row>
-              <Col sm={3}>
-                <ControlLabel>Value</ControlLabel>
-              </Col>
-              <Col sm={3}>
-                <ControlLabel>Measure</ControlLabel>
-              </Col>
-              <Col sm={4}>
-                <ControlLabel>Name</ControlLabel>
-              </Col>
-            </Row>
-            <Row>
-            <Col sm={12}>
-              {this.state.ingredients.map((ingredient, idx) => {
+      <Form onSubmit={this.handleFormSubmit}>
+        <FormGroup>
+          <Row>
+            <Col sm={6}>
+              <Row>
+                <Col sm ={12}>
+                  <Label for="recipeName">Recipe Name</Label>
+                  <Input 
+                    autoComplete="off"
+                    type="text" 
+                    name="recipeName" 
+                    id="recipeName" 
+                    placeholder="Name" 
+                    onChange={this.handleNameChange} 
+                    value={this.state.name} />
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={6}>
+                  <Label for="recipeCalorieCount">Calorie Count</Label>
+                  <Input 
+                    autoComplete="off"
+                    type="text" 
+                    name="recipeCalorieCount" 
+                    id="recipeCalorieCount" 
+                    placeholder="Calorie Count" 
+                    onChange={this.handleCalorieCountChange} 
+                    value={this.state.calorieCount} />
+                </Col>
+                <Col sm={6}>
+                  <Label for="numberOfServings">No. of Servings</Label>
+                  <Input 
+                    autoComplete="off"
+                    type="text" 
+                    name="numberOfServings" 
+                    id="numberOfServings" 
+                    placeholder="No. of Servings" 
+                    onChange={this.handleNumberOfServingsChange} 
+                    value={this.state.numberOfServings} />
+                </Col>
+              </Row>
+            </Col>
+            <Col sm={6}>
+              <Label for="description">Description</Label>
+              <Input 
+                autoComplete="off"
+                type="textarea" 
+                rows='4' 
+                name="description" 
+                id="description" 
+                placeholder="Description" 
+                onChange={this.handleDescriptionChange} 
+                value={this.state.description} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={6}>
+              <Label for="sourceLink">Source Link</Label>
+              <Input 
+                autoComplete="off"
+                type="text" 
+                name="sourceLink" 
+                id="sourceLink" 
+                placeholder="External Link" 
+                onChange={this.handleSourceLinkChange} 
+                value={this.state.sourceLink} />
+            </Col>
+            <Col sm={6}>
+              <Label for="recipeImageLink">Image Link</Label>
+              <Input 
+                autoComplete="off"
+                type="text" 
+                name="recipeImageLink" 
+                id="recipeImageLink" 
+                placeholder="Image Link" 
+                onChange={this.handleImageLinkChange} 
+                value={this.state.imageLink} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={6}>
+              <Label for="numberOfServings">Direction</Label>
+            </Col>
+            <Col sm={6}>
+              <Row>
+                <Col sm={3}>
+                  <Label>Value</Label>
+                </Col>
+                <Col sm={3}>
+                  <Label>Measure</Label>
+                </Col>
+                <Col sm={4}>
+                  <Label>Name</Label>
+                </Col>
+                <Col sm={2}>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={6}>
+              {this.state.directions.map((direction, idx) => {
                 return(
-                  <Row key={"ingredient-container"+idx}>
-                  <Col sm={3}>
-                      <FormGroup controlid="ingredientValue">
-                        <FormControl autoComplete="off"
-                                     onChange={(e) => this.handleIngredientValueChange(e, idx)}
-                                     type="text"
-                                     value={ingredient.value}/>
-                      </FormGroup>
-                    </Col>
-                    <Col sm={3}>
-                      <FormGroup controlid="ingredientMeasure">
-                        <FormControl autoComplete="off"
-                                     onChange={(e) => this.handleIngredientMeasureChange(e, idx)}
-                                     type="text"
-                                     value={ingredient.measure}/>
-                      </FormGroup>
-                    </Col>
-                    <Col sm={4}>
-                      <FormGroup controlid="ingredientName">
-                        <FormControl autoComplete="off"
-                                     onChange={(e) => this.handleIngredientNameChange(e, idx)}
-                                     type="text"
-                                     value={ingredient.name}/>
-                      </FormGroup>
+                  <Row key={"direction-container"+idx}>
+                    <Col sm={10}>
+                      <Input 
+                        autoComplete="off"
+                        type="textarea" 
+                        name="recipeDirection" 
+                        id="recipeDirection" 
+                        onChange={(e) => this.handleDirectionChange(e, idx)} 
+                        value={direction} />
                     </Col>
                     <Col sm={2}>
-                      <button className="btn" key={"remove-ingredient"+idx} onClick={(e) => this.deleteIngredient(e, idx)}>
+                      <Button 
+                        className="btn" 
+                        key={"remove-direction"+idx} 
+                        onClick={(e) => this.deleteDirection(e, idx)}>
                         X
-                      </button>
+                      </Button>
                     </Col>
                   </Row>
                 )
               })} 
+              <div className="top-bottom-small-spacer">
+                <Button className="btn" onClick={this.addDirection}>
+                  Add Direction 
+                </Button>
+              </div>
             </Col>
-            </Row>
-            <div>
-              <button className="btn" onClick={this.addIngredient}>
-                Add Ingredient 
-              </button>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={6}>
-            <button
-              className="btn pull-right"
-              onClick={this.handleClearForm}>Clear form
-            </button>
-          </Col>
-          <Col sm={6}>
-            <input
-              type="submit"
-              className="btn btn-primary pull-right"
-              style={{'marginLeft': '10px'}}
-              value="Submit"/>
-          </Col>
-        </Row>
+            <Col sm={6}>
+                  {this.state.ingredients.map((ingredient, idx) => {
+                    return(
+                      <Row key={"ingredient-container"+idx}>
+                        <Col sm={3}>
+                          <Input 
+                            autoComplete="off"
+                            type="text" 
+                            name="ingredientValue" 
+                            id="ingredientValue" 
+                            onChange={(e) => this.handleIngredientValueChange(e, idx)} 
+                            value={ingredient.value} />
+                        </Col>
+                        <Col sm={3}>
+                          <Input 
+                            autoComplete="off"
+                            type="text" 
+                            name="ingredientMeasure" 
+                            id="ingredientMeasure" 
+                            onChange={(e) => this.handleIngredientMeasureChange(e, idx)} 
+                            value={ingredient.measure} />
+                        </Col>
+                        <Col sm={4}>
+                          <Input 
+                            autoComplete="off"
+                            type="text" 
+                            name="ingredientName" 
+                            id="ingredientName" 
+                            onChange={(e) => this.handleIngredientNameChange(e, idx)} 
+                            value={ingredient.name} />
+                        </Col>
+                        <Col sm={2}>
+                          <Button 
+                            className="btn top-bottom-small-spacer" 
+                            key={"remove-ingredient"+idx} 
+                            onClick={(e) => this.deleteIngredient(e, idx)}>
+                            X
+                          </Button>
+                        </Col>
+                      </Row>
+                    )
+                  })} 
+                  <div className="top-bottom-small-spacer">
+                    <Button className="btn" onClick={this.addIngredient}>
+                      Add Ingredient 
+                    </Button>
+                  </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={6}>
+              <Button
+                className="btn pull-right"
+                onClick={this.handleClearForm}>Clear form
+              </Button>
+            </Col>
+            <Col sm={6}>
+              <Input
+                type="submit"
+                className="btn btn-primary pull-right"
+                style={{'marginLeft': '10px'}}
+                value="Submit"/>
+            </Col>
+          </Row>
+        </FormGroup>
       </Form>
     );
   }

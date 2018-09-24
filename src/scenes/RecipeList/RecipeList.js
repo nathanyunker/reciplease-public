@@ -1,9 +1,9 @@
 import React from 'react';
-import remove from 'lodash/remove'
-import styles from './recipeList.less';
 import { connect } from 'react-redux'
-import { Button, Col, ControlLabel, FormControl, FormGroup, ListGroup, ListGroupItem, Row } from 'reactstrap';
+import { Button, Col, ListGroup, ListGroupItem, Row } from 'reactstrap';
 import { fetchRecipes, deleteRecipe } from '../../actions/index.js'
+
+import styles from './recipeList.less'; //importing styles
  
 @connect((store) => {
   return {

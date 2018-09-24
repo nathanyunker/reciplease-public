@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './auth.less';
-import remove from 'lodash/remove';
 import size from 'lodash/size';
 import { connect } from 'react-redux';
 import SignInForm from './components/SignInForm';
 import SignUpForm from './components/SignUpForm';
 import { getToken } from '../../actions/index.js'
+
+import styles from './auth.less' //importing styles
 
 let errors;
 
@@ -34,8 +34,6 @@ class Auth extends React.Component {
     e.preventDefault();
     this.setState({ errors: []});
     this.setState({ currentForm: 'signUp'});
-
-    console.log('send in the email and password');
   }
 
   getToken() {
@@ -77,11 +75,10 @@ class Auth extends React.Component {
           } else {
             //Handle saving user token
             controller.authenticate(e, user)
-            console.log('YEY CONFIRMATION FOR CREATE', data);
           }
         })
         .catch(function(error) {
-          console.log('THE ERROR', error);
+          console.log('Error Creating Account', error);
         });
 
     }
@@ -91,9 +88,7 @@ class Auth extends React.Component {
     if(e) {e.preventDefault()};
     const endpoint = 'http://localhost:3000/user/authenticate'
     let self = this;
-    console.log('THIS',this);
 
-    console.log('THE USER', user)
     const formPayload = {
       email: user.email,
       password: user.password
@@ -128,7 +123,7 @@ class Auth extends React.Component {
         }
       })
       .catch(function(error) {
-        console.log('THE ERROR', error);
+        console.log('Error Authenticating', error);
         //controller.setState({ errors: e.target.value });
       });
   }
@@ -136,7 +131,7 @@ class Auth extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="text-center half-width"> 
+        <div className="form-container"> 
           {size(this.state.errors) > 0 &&
             this.state.errors.map((error, idx) => {
               return(
@@ -148,8 +143,8 @@ class Auth extends React.Component {
             <SignUpForm signUp={this.signUp} onRef={ref => (this.child = ref)}/> :
             <SignInForm authenticate={this.authenticate} onRef={ref => (this.child = ref)}/>
           }
-          <div>
-            <span onClick={(e) => this.openSignUpForm(e)}>Not a member? Click Here to become one!</span>
+          <div className="text-center">
+            <span className="hyperlink-look" onClick={(e) => this.openSignUpForm(e)}>Not a member? Click Here to become one!</span>
           </div>
         </div>
       </div>

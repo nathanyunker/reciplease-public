@@ -1,6 +1,5 @@
 import React, {Component} from 'react'; 
-import isEmpty from 'lodash/isEmpty'
-import { Button, Form, FormControl, FormGroup, Col, ControlLabel } from 'react-bootstrap';
+import { Button, Form, FormControl, FormGroup, Col, ControlLabel } from 'reactstrap';
 
 class SignUpForm extends Component { 
     constructor(props) {
@@ -66,7 +65,7 @@ class SignUpForm extends Component {
     render() {
         return (
           <Form horizontal onSubmit={this.signUp}>
-              <FormGroup controlid="formHorizontalEmail">
+              <FormGroup controlid="formHorizontalEmail" className="row">
                 <Col componentClass={ControlLabel} sm={2} >
                   Email
                 </Col>
@@ -78,7 +77,7 @@ class SignUpForm extends Component {
                               value={this.state.email}/>
                 </Col>
               </FormGroup>
-              <FormGroup controlid="formHorizontalPassword">
+              <FormGroup controlid="formHorizontalPassword" className="row">
                 <Col componentClass={ControlLabel} sm={2}>
                   Password
                 </Col>
@@ -90,7 +89,7 @@ class SignUpForm extends Component {
                                 value={this.state.password}/>
                 </Col>
               </FormGroup>
-              <FormGroup controlid="formHorizontalPasswordConfirm">
+              <FormGroup controlid="formHorizontalPasswordConfirm" className="row">
                 <Col componentClass={ControlLabel} sm={2}>
                   Confirm Password
                 </Col>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'; 
-import isEmpty from 'lodash/isEmpty'
-import { Button, Form, Input, FormGroup, Col, ControlLabel } from 'reactstrap';
+import { Button, Form, Input, FormGroup, Col, Label } from 'reactstrap';
 
 class SignInForm extends Component { 
     constructor(props) {
@@ -56,9 +55,9 @@ class SignInForm extends Component {
     render() {
         return (
             <Form>
-                <FormGroup controlid="formHorizontalEmail">
+                <FormGroup controlid="formHorizontalEmail" className="row">
                     <Col sm={2} >
-                    Email
+                        Email
                     </Col>
                     <Col sm={10}>
                     <Input autoComplete="off"
@@ -68,9 +67,9 @@ class SignInForm extends Component {
                            value={this.state.email}/>
                     </Col>
                 </FormGroup>
-                <FormGroup controlid="formHorizontalPassword">
+                <FormGroup controlid="formHorizontalPassword" className="row">
                     <Col sm={2}>
-                    Password
+                        Password
                     </Col>
                     <Col sm={10}>
                     <Input type="password" 
@@ -80,14 +79,17 @@ class SignInForm extends Component {
                            value={this.state.password}/>
                     </Col>
                 </FormGroup>
-                <FormGroup controlid="form-submit">
-                    <Col sm={6}>
-                    <div>Remember me</div>
+                <FormGroup controlid="form-submit" className="row">
+                    <Col sm={8}>
+                        <div>
+                            <span className="remember-me-spacer" >Remember Me</span>
+                            <input type="checkbox" name="vehicle2"></input>
+                        </div>
                     </Col>
-                    <Col sm={6} className="text-right">
-                    <Button type="submit" onClick={this.authenticate}>
-                        Sign In
-                    </Button>
+                    <Col sm={4}>
+                        <Button type="submit" onClick={this.authenticate}>
+                            Sign In
+                        </Button>
                     </Col>
                 </FormGroup>
             </Form>
