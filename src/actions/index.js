@@ -2,6 +2,7 @@ let recipeName = '';
 console.log('LETS PRINT OUT OUR ENVIRONMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 console.log('HERE IT IS!!!!-------------------------', process.env.NODE_ENV);
 let domainName = process.env.NODE_ENV === 'production' ? 'https://ancient-eyrie-66439.herokuapp.com' : 'http://localhost:3000';
+let redditDomain = process.env.NODE_ENV === 'production' ? 'not set yet' : 'http://localhost:3001';
 
 export function getToken(recipeId) {
   return function(dispatch) {
@@ -20,6 +21,21 @@ export function fetchRecipes() {
     })
     .then(function(data) { 
     	  dispatch({type: "RECIEVE_RECIPES", payload: data});
+    });
+  }
+}
+
+export function fetchRedditFavorites() {
+  return function(dispatch) {
+  	fetch(redditDomain + '/reddit-profiler/posts/saved', {
+      method: 'get'
+    })
+    .then(function(response) {
+      console.log('HERE IS THE RESPONSE JSON', response.json);
+        return response.json();
+    })
+    .then(function(data) { 
+    	  dispatch({type: "RECIEVE_REDDIT_FAVORITES", payload: data});
     });
   }
 }

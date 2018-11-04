@@ -1,13 +1,13 @@
 import React from 'react';
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Button, Col, ListGroup, ListGroupItem, Row } from 'reactstrap';
-//import { fetchFavorites } from '../../actions/index.js' // need to get favorites
+import { fetchRedditFavorites } from '../../actions/index.js' // need to get favorites
  
-// @connect((store) => {
-//   return {
-//     favorites: store.favorites.favorites
-//   }
-// })
+@connect((store) => {
+  return {
+    favorites: store.redditFavorites
+  }
+})
 class RedditProfiler extends React.Component {
   constructor(props) {
     super(props);
@@ -17,11 +17,9 @@ class RedditProfiler extends React.Component {
     };
   }
 
-//   componentWillMount() {
-//     if (this.props.match.params.id) {
-//       this.props.dispatch(fetchFavorites('enter params here'));
-//     }
-//   }
+  componentWillMount() {
+    this.props.dispatch(fetchRedditFavorites('enter params here'));
+  }
  
   render() {
     return (
@@ -37,6 +35,10 @@ class RedditProfiler extends React.Component {
               })
             } 
           </ListGroup>
+          <div>
+              <span>Here are the favorites</span>
+            {this.props.redditFavorites}
+          </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css'; //importing styles, needs to stay
 import store from "./store.js"
 import App from './app'
 
