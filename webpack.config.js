@@ -1,6 +1,6 @@
 
 const webpack = require('webpack');
-
+console.log('wepack.config.js---------------------');
 module.exports = {
   entry: [
     'react-hot-loader/patch',
