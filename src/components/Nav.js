@@ -32,7 +32,7 @@ class AppNavBar extends React.Component {
           <NavLink href="#/home">Reciplease</NavLink> 
           <NavLink href="#/recipe-list">Recipe List</NavLink> 
           <NavLink href="#/write-recipe">Write Recipe</NavLink> 
-          <NavLink href="#/about">about</NavLink> 
+          <NavLink href="#/reddit-profiler">Reddit Profiler</NavLink> 
           <NavLink href="#/sign-in">{auth}</NavLink>
         </Nav>
     );

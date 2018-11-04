@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import { Button, Form, FormControl, FormGroup, Col, ControlLabel } from 'reactstrap';
+import { Button, Form, Input, FormGroup, Col, ControlLabel } from 'reactstrap';
 
 class SignUpForm extends Component { 
     constructor(props) {
@@ -64,25 +64,25 @@ class SignUpForm extends Component {
 
     render() {
         return (
-          <Form horizontal onSubmit={this.signUp}>
+          <Form onSubmit={this.signUp}>
               <FormGroup controlid="formHorizontalEmail" className="row">
-                <Col componentClass={ControlLabel} sm={2} >
+                <Col sm={2} >
                   Email
                 </Col>
                 <Col sm={10}>
-                  <FormControl autoComplete="off"
-                              onChange={this.handleEmailChange}
-                              type="text"
-                              placeholder="Email"
-                              value={this.state.email}/>
+                  <Input autoComplete="off"
+                           onChange={this.handleEmailChange}
+                           type="text"
+                           placeholder="Email"
+                           value={this.state.email}/>
                 </Col>
               </FormGroup>
               <FormGroup controlid="formHorizontalPassword" className="row">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col sm={2}>
                   Password
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="password" 
+                  <Input type="password" 
                                 placeholder="Password" 
                                 autoComplete="off"
                                 onChange={this.handlePasswordChange}
@@ -90,11 +90,11 @@ class SignUpForm extends Component {
                 </Col>
               </FormGroup>
               <FormGroup controlid="formHorizontalPasswordConfirm" className="row">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col sm={2}>
                   Confirm Password
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="password" 
+                  <Input type="password" 
                                 placeholder="Confirm Password" 
                                 autoComplete="off"
                                 onChange={this.handleConfirmPasswordChange}

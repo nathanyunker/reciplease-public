@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 
 import RecipeList from './scenes/RecipeList/RecipeList';
 import WriteRecipe from './scenes/WriteRecipe/WriteRecipe';
+import RedditProfiler from './scenes/RedditProfiler/RedditProfiler';
 import Auth from './scenes/Auth/Auth';
 import AppNavBar from './components/Nav';
 
@@ -32,6 +33,7 @@ class App extends Component {
 		      <Route path="/sign-in" component={Auth}/>
           <Route path="/recipe-list" component={RecipeList}/>
           <Route path="/write-recipe/:id?" component={WriteRecipe}/>
+          <Route path="/reddit-profiler" component={RedditProfiler}/>
           {!this.state.loggedIn ?
             <Redirect from="/" to="/sign-in" /> :
             <Redirect from="/" to="/recipe-list" />

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import { Button, Form, Input, FormGroup, Col, Label } from 'reactstrap';
+import { Button, Form, Input, FormGroup, Col } from 'reactstrap';
 
 class SignInForm extends Component { 
     constructor(props) {
