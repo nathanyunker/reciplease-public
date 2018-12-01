@@ -1,6 +1,4 @@
-let recipeName = '';
-console.log('LETS PRINT OUT OUR ENVIRONMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-console.log('HERE IT IS!!!!-------------------------', process.env.NODE_ENV);
+console.log('Current Environment-------------------------', process.env.NODE_ENV);
 let domainName = process.env.NODE_ENV === 'production' ? 'https://ancient-eyrie-66439.herokuapp.com' : 'http://localhost:3000';
 let redditDomain = process.env.NODE_ENV === 'production' ? 'not set yet' : 'http://localhost:3001';
 
@@ -25,9 +23,9 @@ export function fetchRecipes() {
   }
 }
 
-export function fetchRedditFavorites() {
+export function fetchRedditFavorites(secret) {
   return function(dispatch) {
-  	fetch(redditDomain + '/reddit-profiler/posts/saved', {
+  	fetch(redditDomain + `/reddit-profiler/posts/saved?secret=${secret}`, {
       method: 'get'
     })
     .then(function(response) {

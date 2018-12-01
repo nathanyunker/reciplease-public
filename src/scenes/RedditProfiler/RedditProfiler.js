@@ -18,7 +18,7 @@ class RedditProfiler extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchRedditFavorites('enter params here'));
+    this.props.dispatch(fetchRedditFavorites('NEED TO GET THE SECRET FROM THE USER'));
   }
  
   render() {

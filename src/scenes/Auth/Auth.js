@@ -1,5 +1,5 @@
 import React from 'react';
-import size from 'lodash/size';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import SignInForm from './components/SignInForm';
 import SignUpForm from './components/SignUpForm';
@@ -70,7 +70,7 @@ class Auth extends React.Component {
           return response.json();
         })
         .then(function(data) {
-          if (size(data.messages) > 0) {
+          if (_.size(data.messages) > 0) {
             controller.setState({ errors: data.messages});
           } else {
             //Handle saving user token
@@ -108,10 +108,13 @@ class Auth extends React.Component {
 
     fetch(endpoint, request)
       .then(function(response) {
+        if (response.status === 401) {
+          return {messages: [{message:response.statusText}]}
+        }
         return response.json();
       })
       .then(function(data) {
-        if (size(data.messages) > 0) {
+        if (_.size(data.messages) > 0) {
           self.setState({ errors: data.messages});
         } else {
           //Handle saving user token
@@ -124,7 +127,7 @@ class Auth extends React.Component {
       })
       .catch(function(error) {
         console.log('Error Authenticating', error);
-        //controller.setState({ errors: e.target.value });
+        self.setState({ errors: e.target.value });
       });
   }
 
@@ -132,7 +135,7 @@ class Auth extends React.Component {
     return (
       <div className="container">
         <div className="form-container"> 
-          {size(this.state.errors) > 0 &&
+          {_.size(this.state.errors) > 0 &&
             this.state.errors.map((error, idx) => {
               return(
                 <div className="text-center error-container" key={"error"+idx}>{error.message}</div>
